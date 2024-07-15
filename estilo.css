@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    
+   
+    text-align: center;
+    z-index: 90; /* Asegura que el header esté por encima de otros elementos*/
+}
+
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+    
+}
+
+nav ul li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 20px;
+   
+}
+nav ul li a:hover {
+    border-radius: 10px;
+    border: 3px solid orange;
+    padding: 4px;
+    
+}
+#inicio{
+    
+    margin-top: 76px;
+   background-position:center;
+  
+    
+   
+    
+}
+#metricas {
+    max-width: 1100px;
+    
+    padding: 55px 15px;
+    
+   
+    
+}
+
+#comparativo {
+    max-width: 1100px;
+    margin: auto;
+    padding: 55px 15px;
+    
+    
+}
+#formulario {
+    max-width: 1100px;
+    margin: auto;
+    padding: 55px 15px;
+    
+}
+.redes {
+    text-decoration: none;
+  
+    display: inline-block;
+    margin-left: 10px;
+    transition: .5s;
+    font-weight: 1000;
+
+   
+}
+
+.redes:hover {
+   
+    font-weight: 600;
+    transform: scale(1.5, 1.5);
+}
+.boton{
+    transition: .5s;
+    margin: 3px;
+}
+.boton:hover{
+    transform: scale(1.1, 1.1);
+}
+.titulos1{
+    display: none;
+}
+.titulos{
+    font-size: 32px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color:#000000;
+    text-decoration: underline;
+    text-decoration-color: orange;
+    text-decoration-thickness: 5px;
+}
+
+  
+.counting .count{
+    font-size: 45px;
+    color: orange;
+    font-weight: 1000;
+    
+}
+
+.hambuerguesa{
+    color:#ffc107;
+    width: 30px;
+    
+    
+}
+.portada{
+    display: none;
+}
+footer {
+    background-color: #010103;
+     color: #ffffff;
+     text-align: center;
+     padding: 7px 0;
+     font-weight:1000;
+ }
+ 
+
+
+/* *********************/
+        /* seccion R E S P O N S I V E */
+        /* *********************/
+        
+        @media screen and (max-width: 800px) {
+            .redes {
+                display: none;
+            }
+            .logo{
+                display: none;
+            }
+            h2{
+                text-align:center;
+                justify-content: center;
+                font-size: 18px;  
+            }
+            .titulos{
+                font-size: 25px;
+            }
+        
+            .counting .count{
+                font-size: 30px;
+                margin: 0;
+             
+            }
+            .seguidores{
+                font-size: 25px;
+
+            }
+            .portada{
+                display: flex;
+                margin-bottom: 1px;
+                
+            }
+            .boton{
+                
+                transition: .5s;
+                margin: 5px 3px;
+                
+            }
+            .boton:hover{
+                transform: scale(1.0, 1.0);
+            }
+            nav ul {
+              display: none;
+            }
+            #metricas {
+                max-width: 1100px;
+                
+                padding: 35px 15px;
+                
+               
+                
+            }
+            
+            #comparativo {
+                max-width: 1100px;
+                margin: auto;
+                padding: 35px 15px;
+                
+                
+            }
+            #formulario {
+                max-width: 1100px;
+                margin: auto;
+                padding: 35px 15px;
+                
+            }
+            
+        }
