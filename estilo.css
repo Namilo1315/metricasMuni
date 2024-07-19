@@ -51,6 +51,9 @@ nav ul li a:hover {
    
     
 }
+.foto{
+    margin-top: -20px;
+}
 #metricas {
     max-width: 1100px;
     
@@ -60,14 +63,14 @@ nav ul li a:hover {
     
 }
 
-#comparativo {
+#balance{
     max-width: 1100px;
     margin: auto;
-    padding: 55px 15px;
+    padding: 55px 5px;
     
     
 }
-#formulario {
+#reclamos{
     max-width: 1100px;
     margin: auto;
     padding: 55px 15px;
