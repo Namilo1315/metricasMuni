@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métricas Maipú Municipio</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+
+        .chart-container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.346);
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 10px;
+            margin-top: 20px; /* Agregado para el margen superior */
+            text-decoration: underline;
+    text-decoration-color: orange;
+    text-decoration-thickness: 5px;
+        }
+
+        /* Estilo para los cuadrados de las leyendas */
+        .chartjs-legend {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .chartjs-legend li {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .chartjs-legend li span {
+            display: none;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Gráfico 1: Comparativo de Cuentas en Redes -->
+<div class="chart-container">
+    <h1>Comparativo de Cuentas en Redes</h1>
+    <canvas id="cuentasChart"></canvas>
+</div>
+
+<!-- Gráfico 2: Comparativo por Zonas -->
+<div class="chart-container">
+    <h1>Comparativo por Zonas</h1>
+    <canvas id="zonasChart"></canvas>
+</div>
+
+<!-- Gráfico 3: Comparativo por Distrito -->
+<div class="chart-container">
+    <h1>Comparativo por Distrito</h1>
+    <canvas id="distritosChart"></canvas>
+</div>
+
+<!-- Gráfico 4: Comparativo por Derivaciones -->
+<div class="chart-container">
+    <h1>Comparativo por Derivaciones</h1>
+    <canvas id="derivacionesChart"></canvas>
+</div>
+
+<!-- Gráfico 5: Comparativo por Reclamos -->
+<div class="chart-container">
+    <h1>Comparativo por Reclamos</h1>
+    <canvas id="reclamosChart"></canvas>
+</div>
+
+<!-- Importar la librería Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Gráfico 1: Comparativo de Cuentas en Redes
+    const cuentasCtx = document.getElementById('cuentasChart').getContext('2d');
+    const cuentasData = {
+        labels: ['Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
+        datasets: [
+            {
+                label: 'Maipú Municipio',
+                data: [139, 48, 48, 53, 55, 57, 64, 36],
+                backgroundColor: 'rgba(0, 102, 204, 0.8)',
+                borderColor: 'rgba(0, 102, 204, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Matías Stevanato',
+                data: [50, 28, 12, 9, 17, 16, 14, 14],
+                backgroundColor: 'rgba(255, 87, 34, 0.8)',
+                borderColor: 'rgba(255, 87, 34, 1)',
+                borderWidth: 2
+            },
+            {
+        type: 'line',
+        label: 'Tendencia General',
+        data:[139, 48, 48, 53, 55, 57, 64, 36], // Datos ajustados
+        borderColor: '#FF4081', // Color vibrante
+        backgroundColor: 'rgba(128, 0, 128, 0.2)', // Color de fondo violeta suave
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4
+      }
+      
+            
+        ]
+    };
+
+    const cuentasOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    usePointStyle: true,
+                    pointStyle: 'rect',
+                    font: { size: 14 }
+                }
+            },
+        tooltip: {
+        mode: 'index',
+        intersect: false,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        titleFont: { size: 16 },
+        bodyFont: { size: 14 },
+        padding: 10,
+        caretPadding: 5
+      }
+        },
+        scales: {
+      x: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        },
+        ticks: {
+          color: '#000000', // Color más oscuro para los nombres de los meses
+        }
+      },
+      
+      y: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        beginAtZero: true,
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        }
+      }
+    },
+        
+    };
+
+    const cuentasChart = new Chart(cuentasCtx, {
+        type: 'bar',
+        data: cuentasData,
+        options: cuentasOptions
+    });
+
+    // Gráfico 2: Comparativo por Zonas
+    const zonasCtx = document.getElementById('zonasChart').getContext('2d');
+    const zonasData = {
+        labels: ['Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
+        datasets: [
+            {
+                label: 'Centro',
+                data: [112, 86, 38, 44, 53, 55, 69, 36],
+                backgroundColor: 'rgba(0, 102, 204, 0.8)',
+                borderColor: 'rgba(0, 102, 204, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Este',
+                data: [44, 26, 8, 11, 15, 9, 2, 8],
+                backgroundColor: 'rgba(255, 87, 34, 0.8)',
+                borderColor: 'rgba(255, 87, 34, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Sur',
+                data: [35, 15, 14, 7, 4, 9, 7, 6],
+                backgroundColor: 'rgba(76, 175, 80, 0.8)',
+                borderColor: 'rgba(76, 175, 80, 1)',
+                borderWidth: 2
+            },
+            {
+        type: 'line',
+        label: 'Tendencia General',
+        data: [112, 86, 38, 44, 53, 55, 69, 36],
+        borderColor: '#FF4081', // Color vibrante
+        backgroundColor: 'rgba(128, 0, 128, 0.2)', // Color de fondo violeta suave
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4
+      }
+        ]
+    };
+
+    const zonasOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    usePointStyle: true,
+                    pointStyle: 'rect',
+                    font: { size: 14 }
+                }
+            },
+            tooltip: {
+        mode: 'index',
+        intersect: false,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        titleFont: { size: 16 },
+        bodyFont: { size: 14 },
+        padding: 10,
+        caretPadding: 5
+      }
+        },
+        scales: {
+      x: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        },
+        ticks: {
+          color: '#000000', // Color más oscuro para los nombres de los meses
+        }
+      },
+      
+      y: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        beginAtZero: true,
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        }
+      }
+    },
+    };
+
+    const zonasChart = new Chart(zonasCtx, {
+        type: 'bar',
+        data: zonasData,
+        options: zonasOptions
+    });
+
+    // Gráfico 3: Comparativo por Distrito
+    const distritosCtx = document.getElementById('distritosChart').getContext('2d');
+    const distritosData = {
+        labels: ['Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
+        datasets: [
+            {
+                label: 'Centro',
+                data: [81, 46, 35, 19, 26, 14, 46, 23],
+                backgroundColor: 'rgba(0, 102, 204, 0.8)',
+                borderColor: 'rgba(0, 102, 204, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Luzuriaga',
+                data: [21, 27, 6, 3, 11, 22, 13, 7],
+                backgroundColor: 'rgba(255, 87, 34, 0.8)',
+                borderColor: 'rgba(255, 87, 34, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Rodeo del Medio',
+                data: [19, 6, 1, 4, 13, 3, 1, 3],
+                backgroundColor: 'rgba(76, 175, 80, 0.8)',
+                borderColor: 'rgba(76, 175, 80, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Russell',
+                data: [17, 11, 6, 7, 5, 3, 4, 2],
+                backgroundColor: 'rgba(255, 215, 0, 0.8)',
+                borderColor: 'rgba(255, 215, 0, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Coquimbito',
+                data: [15, 15, 5, 5, 4, 7, 6, 7],
+                backgroundColor: 'rgba(0, 191, 255, 0.8)',
+                borderColor: 'rgba(0, 191, 255, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Gral Gutierrez',
+                data: [10, 10, 2, 18, 11, 11, 5, 3],
+                backgroundColor: 'rgba(255, 82, 193, 0.8)',
+                borderColor: 'rgba(255, 82, 193, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Fray Luis Beltrán',
+                data: [5, 6, 2, 6, 2, 5, 1, 1],
+                backgroundColor: 'rgba(139, 69, 19, 0.8)',
+                borderColor: 'rgba(139, 69, 19, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Lunlunta',
+                data: [0, 0, 0, 0, 0, 4, 1, 2],
+                backgroundColor: 'rgba(186, 85, 211, 0.8)',
+                borderColor: 'rgba(186, 85, 211, 1)',
+                borderWidth: 2
+            },
+            {
+        type: 'line',
+        label: 'Tendencia General',
+        data: [81, 46, 35, 19, 26, 14, 46, 23],
+        borderColor: '#FF4081', // Color vibrante
+        backgroundColor: 'rgba(128, 0, 128, 0.2)', // Color de fondo violeta suave
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4
+      }
+        ]
+    };
+
+    const distritosOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    usePointStyle: true,
+                    pointStyle: 'rect',
+                    font: { size: 14 }
+                }
+            },
+            tooltip: {
+        mode: 'index',
+        intersect: false,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        titleFont: { size: 16 },
+        bodyFont: { size: 14 },
+        padding: 10,
+        caretPadding: 5
+      }
+        },
+        scales: {
+      x: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        },
+        ticks: {
+          color: '#000000', // Color más oscuro para los nombres de los meses
+        }
+      },
+      
+      y: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        beginAtZero: true,
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        }
+      }
+    },
+    };
+
+
+    const distritosChart = new Chart(distritosCtx, {
+        type: 'bar',
+        data: distritosData,
+        options: distritosOptions
+    });
+
+    // Gráfico 4: Comparativo por Derivaciones
+    const derivacionesCtx = document.getElementById('derivacionesChart').getContext('2d');
+    const derivacionesData = {
+        labels: ['Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
+        datasets: [
+            {
+                label: 'Serv. Sanitarios',
+                data: [121, 45, 25, 17, 27, 27, 26, 14],
+                backgroundColor: 'rgba(0, 102, 204, 0.8)',
+                borderColor: 'rgba(0, 102, 204, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Electromecánica',
+                data: [19, 21, 12, 11, 12, 19, 21, 19],
+                backgroundColor: 'rgba(255, 87, 34, 0.8)',
+                borderColor: 'rgba(255, 87, 34, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Delegaciones',
+                data: [17, 30, 8, 0, 8, 4, 3, 6],
+                backgroundColor: 'rgba(76, 175, 80, 0.8)',
+                borderColor: 'rgba(76, 175, 80, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Servicios Públicos',
+                data: [8, 9, 4, 15, 13, 5, 14, 2],
+                backgroundColor: 'rgba(255, 215, 0, 0.8)',
+                borderColor: 'rgba(255, 215, 0, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Obras Públicas',
+                data: [6, 2, 1, 8, 5, 4, 3, 0],
+                backgroundColor: 'rgba(0, 191, 255, 0.8)',
+                borderColor: 'rgba(0, 191, 255, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Residuos',
+                data: [3, 1, 4, 11, 6, 8, 6, 5],
+                backgroundColor: 'rgba(255, 82, 193, 0.8)',
+                borderColor: 'rgba(255, 82, 193, 1)',
+                borderWidth: 2
+            },
+            {
+        type: 'line',
+        label: 'Tendencia General',
+        data: [121, 45, 25, 17, 27, 27, 26, 14],
+        borderColor: '#FF4081', // Color vibrante
+        backgroundColor: 'rgba(128, 0, 128, 0.2)', // Color de fondo violeta suave
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4
+      }
+      
+            
+        ]
+    };
+            
+
+   
+    const derivacionesOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    usePointStyle: true,
+                    pointStyle: 'rect',
+                    font: { size: 14 }
+                }
+            },
+            tooltip: {
+        mode: 'index',
+        intersect: false,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        titleFont: { size: 16 },
+        bodyFont: { size: 14 },
+        padding: 10,
+        caretPadding: 5
+      }
+        },
+        scales: {
+      x: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        },
+        ticks: {
+          color: '#000000', // Color más oscuro para los nombres de los meses
+        }
+      },
+      
+      y: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        beginAtZero: true,
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        }
+      }
+    },
+        
+    };
+
+       
+
+    const derivacionesChart = new Chart(derivacionesCtx, {
+        type: 'bar',
+        data: derivacionesData,
+        options: derivacionesOptions
+    });
+
+    // Gráfico 5: Comparativo por Reclamos
+    const reclamosCtx = document.getElementById('reclamosChart').getContext('2d');
+    const reclamosData = {
+        labels: ['Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
+        datasets: [
+            {
+                label: 'Falta de Agua',
+                data: [105, 15, 7, 1, 6, 7, 4, 6],
+                backgroundColor: 'rgba(0, 102, 204, 0.8)',
+                borderColor: 'rgba(0, 102, 204, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Pérdidas de Agua',
+                data: [12, 19, 11, 18, 8, 12, 6, 4],
+                backgroundColor: 'rgba(255, 87, 34, 0.8)',
+                borderColor: 'rgba(255, 87, 34, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Limpieza',
+                data: [17, 5, 3, 2, 12, 12, 11, 3],
+                backgroundColor: 'rgba(76, 175, 80, 0.8)',
+                borderColor: 'rgba(76, 175, 80, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Limpieza Acequias',
+                data: [5, 28, 9, 9, 11, 1, 2, 4],
+                backgroundColor: 'rgba(255, 215, 0, 0.8)',
+                borderColor: 'rgba(255, 215, 0, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Luminarias',
+                data: [19, 17, 12, 11, 12, 19, 21, 19],
+                backgroundColor: 'rgba(0, 191, 255, 0.8)',
+                borderColor: 'rgba(0, 191, 255, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Residuos',
+                data: [3, 1, 4, 11, 6, 2, 6, 2],
+                backgroundColor: 'rgba(255, 82, 193, 0.8)',
+                borderColor: 'rgba(255, 82, 193, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Pozos en la Calle',
+                data: [1, 2, 3, 8, 3, 4, 5, 1],
+                backgroundColor: 'rgba(139, 69, 19, 0.8)',
+                borderColor: 'rgba(139, 69, 19, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Destape de Cloaca',
+                data: [8, 3, 5, 0, 10, 8, 16, 3],
+                backgroundColor: 'rgba(186, 85, 211, 0.8)',
+                borderColor: 'rgba(186, 85, 211, 1)',
+                borderWidth: 2
+            },
+            {
+        type: 'line',
+        label: 'Tendencia General',
+        data:[105, 29, 13, 19, 13, 20, 22, 22],
+        borderColor: '#FF4081', // Color vibrante
+        backgroundColor: 'rgba(128, 0, 128, 0.2)', // Color de fondo violeta suave
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4
+      }
+      
+            
+        ]
+    };
+            
+    
+
+    const reclamosOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    usePointStyle: true,
+                    pointStyle: 'rect',
+                    font: { size: 15, }
+        
+                }
+            },
+            tooltip: {
+        mode: 'index',
+        intersect: false,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        titleFont: { size: 16 },
+        bodyFont: { size: 14 },
+        padding: 10,
+        caretPadding: 5
+      }
+        },
+        scales: {
+      x: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        },
+        ticks: {
+          color: '#000000', // Color más oscuro para los nombres de los meses
+        }
+      },
+      
+      y: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        beginAtZero: true,
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        }
+      }
+    },
+    };
+
+    const reclamosChart = new Chart(reclamosCtx, {
+        type: 'bar',
+        data: reclamosData,
+        options: reclamosOptions
+    });
+</script>
+
+</body>
+</html>

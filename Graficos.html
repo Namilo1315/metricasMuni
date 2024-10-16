@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Métricas Muipú Municipio</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .chart-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 10px;
+      margin-top: 20px; /* Agregado para el margen superior */
+    }
+
+    /* Estilo para los cuadrados de las leyendas */
+    .chartjs-legend {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .chartjs-legend li {
+      display: flex;
+      align-items: center;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    .chartjs-legend li span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chart-container">
+  <h2>Comparativo Derivaciones</h2>
+  <canvas id="mixtoChart"></canvas>
+</div>
+
+<!-- Importar la librería Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('mixtoChart').getContext('2d');
+
+  const data = {
+    labels: ['Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Servicios Sanitarios',
+        data: [121, 45, 25, 17, 27, 27, 26, 14],
+        backgroundColor: 'rgba(0, 102, 204, 0.8)', // Azul más fuerte
+        borderColor: 'rgba(0, 102, 204, 1)',
+        borderWidth: 2
+      },
+      {
+        type: 'bar',
+        label: 'Electromecánica',
+        data: [19, 21, 12, 11, 12, 19, 21, 19],
+        backgroundColor: 'rgba(255, 87, 34, 0.8)', // Naranja más fuerte
+        borderColor: 'rgba(255, 87, 34, 1)',
+        borderWidth: 2
+      },
+      {
+        type: 'bar',
+        label: 'Delegaciones',
+        data: [17, 30, 8, 0, 8, 4, 3, 6],
+        backgroundColor: 'rgba(127, 127, 127, 0.8)', // Gris más fuerte
+        borderColor: 'rgba(127, 127, 127, 1)',
+        borderWidth: 2
+      },
+      {
+        type: 'bar',
+        label: 'Servicios Públicos',
+        data: [8, 9, 4, 15, 13, 5, 14, 2],
+        backgroundColor: 'rgba(255, 215, 0, 0.8)', // Amarillo más fuerte
+        borderColor: 'rgba(255, 215, 0, 1)',
+        borderWidth: 2
+      },
+      {
+        type: 'bar',
+        label: 'Obras Públicas',
+        data: [6, 2, 1, 8, 5, 4, 3, 0],
+        backgroundColor: 'rgba(0, 191, 255, 0.8)', // Celeste más fuerte
+        borderColor: 'rgba(0, 191, 255, 1)',
+        borderWidth: 2
+      },
+      {
+        type: 'bar',
+        label: 'Residuos',
+        data: [3, 1, 4, 11, 6, 8, 6, 5],
+        backgroundColor: 'rgba(76, 175, 80, 0.8)', // Verde más fuerte
+        borderColor: 'rgba(76, 175, 80, 1)',
+        borderWidth: 2
+      },
+      {
+        type: 'line',
+        label: 'Tendencia General',
+        data: [121, 45, 25, 17, 27, 27, 26, 14], // Datos ajustados
+        borderColor: '#FF4081', // Color vibrante
+        backgroundColor: 'rgba(128, 0, 128, 0.2)', // Color de fondo violeta suave
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4
+      }
+    ]
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          usePointStyle: true,
+          pointStyle: 'rect', // Cambiado a cuadrado
+          font: {
+            size: 14
+          }
+        }
+      },
+      tooltip: {
+        mode: 'index',
+        intersect: false,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        titleFont: { size: 16 },
+        bodyFont: { size: 14 },
+        padding: 10,
+        caretPadding: 5
+      }
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        },
+        ticks: {
+          color: '#000000', // Color más oscuro para los nombres de los meses
+        }
+      },
+      
+      y: {
+        title: {
+          display: true,
+          text: '',
+          font: {
+            size: 16
+          }
+        },
+        beginAtZero: true,
+        grid: {
+          color: 'rgba(200, 200, 200, 0.1)'
+        }
+      }
+    },
+    animation: {
+      duration: 2000, // 1 segundo de animación
+      easing: 'easeOutCubic'
+    }
+  };
+
+  const mixtoChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
