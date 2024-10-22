@@ -3,12 +3,14 @@
 <head>
     <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
     <meta charset="UTF-8">
+    <title>Métricas Comunicación</title>
+    <link rel="stylesheet" href="./estilo.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Métricas Maipú Municipio</title>
+    
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f4f8;
+            background-color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -18,11 +20,11 @@
         .chart-container {
             width: 100%;
             max-width: 1005px;
-            margin: 20px;
+            margin: 50px;
             background-color: #fff;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.513);
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.744);
             position: relative; /* Esto asegura que las imágenes se posicionen correctamente */
         }
 
@@ -30,7 +32,7 @@
             text-align: center;
             color: #000000;
             margin-bottom: 10px;
-            margin-top: 20px; /* Agregado para el margen superior */
+            margin-top: 15px; /* Agregado para el margen superior */
             text-decoration: underline;
     text-decoration-color: orange;
     text-decoration-thickness: 5px;
@@ -72,25 +74,98 @@
             height: 20px;
             margin-right: 5px;
         }
+        .menu1{
+          font-weight: 800;
+        }
+        .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+ background-color: #ffffff;
+  z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.008); /* Sombra opcional */
+  padding: 0px 0; /* Espacio interno para el contenido del header */
+  margin-bottom: 20px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* Centra el menú horizontalmente */
+}
+
+.menu li {
+  margin-right: 1px;
+  
+}
+
+.menu li a {
+  text-decoration: none;
+  color: #000; /* Cambia el color según tu diseño */
+  font-weight: bold;
+  padding: 10px;
+}
+
+body {
+  padding-top: 10px; /* Ajusta para que el contenido no quede oculto por el header fijo */
+}
+
+.content {
+  margin-top: 8px; /* Espacio entre el menú y el contenido siguiente */
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
     </style>
 </head>
 <body>
-
+  
+  <div class="container header">
+    <div class="row">
+      <div class="col">
+        <h1></h1>
+        <nav>
+          <ul class="menu">
+            <li><a href="./index.html">INICIO</a></li>
+            <li><a href="#cuentas">CUENTAS</a></li>
+            <li><a href="#zonas">ZONAS</a></li>
+            <li><a href="#distrito">DISTRITOS</a></li>
+            <li><a href="#derivaciones">DERIVACIONES</a></li>
+            <li><a href="#reclamo">RECLAMOS</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container content">
+    <!-- Contenido de la página -->
+  </div>
+  
+  
 <!-- Gráfico 1: Comparativo de Cuentas en Redes -->
-<div class="chart-container">
+<div id="cuentas"></div>
+<div class="chart-container" >
   <h1>Comparativo de Cuentas en Redes</h1>
-  <img src="./imagenes/logo.png" alt="Logo" class="logo-cuentas"> <!-- Imagen del logo -->
-  <canvas id="cuentasChart"></canvas>
+ <img src="./imagenes/logo.png" alt="Logo" class="logo-cuentas"> <!-- Imagen del logo -->
+  <canvas id="cuentasChart"></canvas></a> 
 </div>
 
 <!-- Gráfico 2: Comparativo por Zonas -->
-<div class="chart-container">
+<div id="zonas"></div>
+<div class="chart-container" >
   <h1>Comparativo por Zonas</h1>
   <img src="./imagenes/logo.png" alt="Logo" class="logo-zonas"> <!-- Imagen del logo -->
   <canvas id="zonasChart"></canvas>
 </div>
 
 <!-- Gráfico 3: Comparativo por Distrito -->
+<div id="distrito"></div>
 <div class="chart-container">
   <h1>Comparativo por Distrito</h1>
   <img src="./imagenes/logo.png" alt="Logo" class="logo-distritos"> <!-- Imagen del logo -->
@@ -98,14 +173,16 @@
 </div>
 
 <!-- Gráfico 4: Comparativo por Derivaciones -->
-<div class="chart-container">
+<div id="derivaciones"></div>
+<div class="chart-container" >
   <h1>Comparativo por Derivaciones</h1>
   <img src="./imagenes/logo.png" alt="Logo" class="logo-derivaciones"> <!-- Imagen del logo -->
   <canvas id="derivacionesChart"></canvas>
 </div>
 
 <!-- Gráfico 5: Comparativo por Reclamos -->
-<div class="chart-container">
+<div id="reclamo"></div>
+<div class="chart-container" >
   <h1>Comparativo por Reclamos</h1>
   <img src="./imagenes/logo.png" alt="Logo" class="logo-reclamos"> <!-- Imagen del logo -->
   <canvas id="reclamosChart"></canvas>
@@ -374,7 +451,7 @@
             {
         type: 'line',
         label: 'Tendencia General',
-        data: [81, 46, 35, 19, 26, 14, 46, 23],
+        data: [81, 46, 35, 19, 26, 23, 46, 23],
         borderColor: '#FF4081', // Color vibrante
         backgroundColor: 'rgba(128, 0, 128, 0.2)', // Color de fondo violeta suave
         borderWidth: 3,
