@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./estilo.css">
+    <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
+    <title>Panel de Control</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.685);
+            width: 400px;
+            text-align: center;
+            font-size: 18px;
+        }
+        h2 {
+            color: #000000b0;
+            margin-bottom: 20px;
+        }
+        img {
+            width: 80px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .spinner {
+            display: none;
+            margin: 20px auto;
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .bot{
+            font-size: 16px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container" id="loginContainer">
+    <img src="./imagenes/logo.png" alt="Logo del sistema">
+    <h2>Iniciar Sesión</h2>
+    <div id="message"></div>
+    <input type="text" id="username" placeholder="Usuario" required>
+    <input type="password" id="password" placeholder="Contraseña" required>
+    <button class="bot" onclick="login()">INGRESAR</button>
+</div>
+
+<!-- Círculo de carga -->
+<div class="spinner" id="spinner"></div>
+
+<script>
+    // Lista de usuarios y contraseñas válidas
+    const validCredentials = [
+        { username: "Javicomu", password: "muni2024" },
+        { username: "Naticomu", password: "2024" }
+    ];
+
+    function login() {
+        // Obtener los valores de los inputs
+        const usernameField = document.getElementById("username");
+        const passwordField = document.getElementById("password");
+        const username = usernameField.value;
+        const password = passwordField.value;
+        const message = document.getElementById("message");
+        const spinner = document.getElementById("spinner");
+        const loginContainer = document.getElementById("loginContainer");
+
+        // Limpiar mensajes previos
+        message.innerText = "";
+        message.className = "";
+
+        // Verificar si los campos están vacíos
+        if (username === "" || password === "") {
+            message.innerText = "Ambos campos son obligatorios";
+            message.className = "error";
+            return;
+        }
+
+        // Limpiar campos de texto
+        usernameField.value = "";
+        passwordField.value = "";
+
+        // Verificar las credenciales
+        const isValidUser = validCredentials.some(
+            (cred) => cred.username === username && cred.password === password
+        );
+
+        if (isValidUser) {
+            // Mostrar el círculo de carga y ocultar el formulario
+            spinner.style.display = "block";
+            loginContainer.style.display = "none";
+
+            // Simular un pequeño retraso para la validación
+            setTimeout(() => {
+                // Redirigir al archivo control.html
+                window.location.href = "control.html";
+            }, 1000);
+        } else {
+            // Mostrar mensaje de error sin mostrar el círculo de carga
+            message.innerText = "Usuario o contraseña incorrectos";
+            message.className = "error";
+        }
+    }
+</script>
+
+</body>
+</html>
+
+

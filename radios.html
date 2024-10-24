@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Actividades</title>
+    <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        .calendar-container {
+            width: 83%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.498);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .chart-container canvas {
+            max-width: 900px;
+            height: auto;
+            
+        }
+
+        .btn-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            
+        }
+
+        .section {
+            display: none;
+        }
+        .card {
+            transition: transform 0.3s; /* Duración de la transición */
+           
+        }
+      
+    </style>
+</head>
+
+<body>
+    <div class="container my-4">
+        <div class="row">
+          <div class="col-md-1">
+            <a href="./control.html"><img src="./imagenes/logo.png" alt="" width="70px"></a>
+           
+        </div>
+         <div class="col-md-11">
+          <h1 class="text-center mb-4 fw-bold" id="panel">Calendario de Actividades</h1>
+        </div>
+         </div>
+        
+        </div>
+    <div class="container mt-2">
+        <div class="row">
+            <!-- Sección 1: Medios de Comunicación -->
+            <div class="col-md-12 text-center">
+                <div class="card h-100 text-center shadow">
+                    <div class="card-body ">
+                        <h5 class="card-title fw-bold">SPOT DE RADIO </h5>
+                        <p class="card-text"> Campaña y Medios</p>
+                        <button class="btn btn-primary" onclick="showCalendar('grafica')">Ver detalles</button>
+                    </div>
+                </div>
+            </div>
+
+           
+
+           
+        </div>
+    </div>
+
+
+   <!-- Sección 3: Diseños 
+        <div class="text-center mb-3">
+            <button class="btn btn-primary" onclick="showCalendar('grafica')">Gráfica</button>
+            <button class="btn btn-primary" onclick="showCalendar('web')">Web</button>
+            <button class="btn btn-primary" onclick="showCalendar('audiovisual')">Audiovisual</button>
+        </div>
+    -->
+        <div id="grafica-calendar" class="calendar-container section ">
+            <button class="btn-close" onclick="closeCalendar('grafica')"><i class="fas fa-times"></i></button>
+            <h4  class="text-center">Actividades en Radio</h4>
+            <input type="month" id="grafica-month" onchange="showActivities('grafica')">
+            <p>Mes seleccionado: <span id="grafica-selected-month"></span></p>
+            <button class="btn btn-success" onclick="downloadPDF('grafica')">Descargar PDF</button>
+            <div id="grafica-activities-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Radio</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grafica-activities-body"></tbody>
+                </table>
+            </div>
+            <div class="chart-container">
+                <canvas id="graficaChart"></canvas>
+            </div>
+        </div>
+
+       
+
+        
+
+    </div>
+    <script>
+        const { jsPDF } = window.jspdf;
+    
+        const dataGrafica = {
+            labels: Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
+            datasets: [{
+                label: 'Actividades en Radio',
+                data: [12, 19, 3, 5, 2, 3, 9, 10, 8, 12, 15, 7],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true,
+                lineTension: 0.4
+            }]
+        };
+    
+       
+    
+        let graficaChart;
+      
+    
+        function showCalendar(type) {
+            document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+            document.getElementById(`${type}-calendar`).style.display = 'block';
+    
+            if (type === 'grafica') {
+                if (!graficaChart) {
+                    graficaChart = createChart('graficaChart', dataGrafica);
+                }
+            } else if (type === 'web') {
+                if (!webChart) {
+                    webChart = createChart('webChart', dataWeb);
+                }
+            } else if (type === 'audiovisual') {
+                if (!audiovisualChart) {
+                    audiovisualChart = createChart('audiovisualChart', dataAudiovisual);
+                }
+            }
+        }
+    
+        function createChart(canvasId, data) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            return new Chart(ctx, {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#000000', // Letras en negro
+                                font: {
+                                    weight: 'bold', // Letras en negrita
+                                    size: 14 // Aumentar tamaño de fuente
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#000000', // Letras en negro
+                                font: {
+                                    weight: 'bold', // Letras en negrita
+                                    size: 14 // Aumentar tamaño de fuente
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#000000', // Letras en negro para la leyenda
+                                font: {
+                                    weight: 'bold', // Letras en negrita para la leyenda
+                                    size: 16 // Aumentar tamaño de fuente de la leyenda
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        function showActivities(type) {
+            const selectedMonth = document.getElementById(`${type}-month`).value;
+            const monthName = new Date(selectedMonth).toLocaleString('default', { month: 'long' });
+            document.getElementById(`${type}-selected-month`).textContent = monthName;
+    
+            const tbody = document.getElementById(`${type}-activities-body`);
+            tbody.innerHTML = '';
+    
+            for (let i = 1; i <= 5; i++) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${monthName}-0${-i}</td>
+                    <td>Radio${i}</td>
+                    <td><a href="#">Link ${i}</a></td>
+                `;
+                tbody.appendChild(row);
+            }
+        }
+    
+        async function downloadPDF(type) {
+            const doc = new jsPDF();
+            const selectedMonth = document.querySelector(`#${type}-selected-month`).textContent;
+    
+            // Agregar el título
+            doc.text(`Actividades del Mes: ${selectedMonth}`, 10, 10);
+    
+            // Capturar el gráfico
+            const canvas = document.getElementById(`${type}Chart`);
+            const imgData = canvas.toDataURL('image/png');
+            doc.addImage(imgData, 'PNG', 10, 20, 180, 100); // Ajustar el tamaño según sea necesario
+    
+            // Agregar la tabla
+            doc.autoTable({
+                head: [['Fecha', 'Radio', 'Link']],
+                body: Array.from(document.querySelectorAll(`#${type}-activities-body tr`)).map(row => Array.from(row.children).map(cell => cell.innerText)),
+                startY: 130 // Ajustar la posición para que no se superponga con el gráfico
+            });
+    
+            // Guardar el PDF
+            doc.save(`${type}-actividades-${selectedMonth}.pdf`);
+        }
+    
+        function closeCalendar(type) {
+            document.getElementById(`${type}-calendar`).style.display = 'none';
+        }
+        
+    </script>
+    
+</body>
+
+</html>
