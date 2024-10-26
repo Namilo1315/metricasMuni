@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario de Actividades</title>
+    <title>Creación de Diseños</title>
     <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -12,306 +12,201 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
     <style>
-        body {
-            background-color: #ffffff;
+        body { background-color: #ffffff; }
+        .container1 { width: 100%; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); margin-top: 20px; }
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: -10px; }
+        .graph-container { height: 390px; }
+        .button-group { display: flex; justify-content: space-between; }
+        .button-group button { width: 48%; }
+        .export-button { margin-top: 15px; display: none; }
+        .titulos{
+            font-size: 32px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #000000;
+            text-decoration: underline;
+            text-decoration-color: orange;
+            text-decoration-thickness: 5px;
         }
-
-        .calendar-container {
-            width: 97%;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.498);
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .chart-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .chart-container canvas {
-            max-width: 900px;
-            height: auto;
-            
-        }
-
-        .btn-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            
-        }
-
-        .section {
-            display: none;
-        }
-        .card {
-            transition: transform 0.3s; /* Duración de la transición */
-           
-        }
-      
     </style>
 </head>
-
 <body>
-    <div class="container my-4">
-        <div class="row">
-          <div class="col-md-1">
-            <a href="./control.html"><img src="./imagenes/logo.png" alt="" width="70px"></a>
-           
-        </div>
-         <div class="col-md-11">
-          <h1 class="text-center mb-4 fw-bold" id="panel">Calendario de Actividades</h1>
-        </div>
-         </div>
     <div class="container mt-2">
-        <div class="row g-4">
-            <!-- Sección 1: Medios de Comunicación -->
-            <div class="col-md-6">
-                <div class="card h-100 text-center shadow">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">FOLLETOS CAMPAÑAS</h5>
-                        <p class="card-text">Pedidos por área</p>
-                        <button class="btn btn-primary" onclick="showCalendar('grafica')">Ver detalles</button>
+        <div class="panel-header">
+            <h1>Panel de Control - Creación de Diseños</h1>
+            <img src="./imagenes/logo.png" alt="Imagen" class="img-fluid" style="width: 80px;">
+        </div>
+        <hr>
+        <div class="container1">
+            <h2 class="text-center titulos mt-1">Creación de Diseños</h2>
+            <div class="media-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="button-group mb-4">
+                            <button class="btn btn-primary fw-bold" onclick="showCalendar('Pedidos por áreas')">PEDIDOS POR ÁREAS</button>
+                            <button class="btn btn-primary fw-bold" onclick="showCalendar('Folletería')">PEDIDOS FOLLETERÍA</button>
+                        </div>
+                        <div id="calendar" style="display: block;">
+                            <h3 id="selected-type"></h3>
+                            <input type="month" id="calendar-month" class="form-control mb-3" onchange="loadTable()">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Detalle</th>
+                                        <th>Link</th>
+                                        <th class="remove-btn" style="width: 80px;">
+                                            <button class="btn btn-danger btn-sm" onclick="removeAllRows(selectedType)">X</button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="schedule-table"></tbody>
+                            </table>
+                            <div class="export-button">
+                                <button class="btn btn-success" onclick="exportToPDF()">Descargar en PDF</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="graph-container">
+                            <h3 class="text-center" id="chart-title">Actividades Pedidos por áreas</h3>
+                            <canvas id="myChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Sección 2: Campaña Vía Pública -->
-            <div class="col-md-6">
-                <div class="card h-100 text-center shadow">
-                    <div class="card-body">
-                        <h4 class="card-title fw-bold">DISEÑOS PEDIDOS</h4>
-                        <p class="card-text">Pedidos por áreas</p>
-                        <button class="btn btn-primary" onclick="showCalendar('web')">Ver detalles</button>
-                    </div>
-                </div>
-            </div>
-
-           
-
-           
         </div>
-    </div>
-
-
-   <!-- Sección 3: Diseños 
-        <div class="text-center mb-3">
-            <button class="btn btn-primary" onclick="showCalendar('grafica')">Gráfica</button>
-            <button class="btn btn-primary" onclick="showCalendar('web')">Web</button>
-            <button class="btn btn-primary" onclick="showCalendar('audiovisual')">Audiovisual</button>
-        </div>
-    -->
-        <div id="grafica-calendar" class="calendar-container section ">
-            <button class="btn-close" onclick="closeCalendar('grafica')"><i class="fas fa-times"></i></button>
-            <h4  class="text-center">Pedidos de Folletos</h4>
-            <input type="month" id="grafica-month" onchange="showActivities('grafica')">
-            <p>Mes seleccionado: <span id="grafica-selected-month"></span></p>
-            <button class="btn btn-success" onclick="downloadPDF('grafica')">Descargar PDF</button>
-            <div id="grafica-activities-table">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>folletos</th>
-                            <th>Link</th>
-                        </tr>
-                    </thead>
-                    <tbody id="grafica-activities-body"></tbody>
-                </table>
-            </div>
-            <div class="chart-container">
-                <canvas id="graficaChart"></canvas>
-            </div>
-        </div>
-
-        <div id="web-calendar" class="calendar-container section">
-            <button class="btn-close" onclick="closeCalendar('web')"><i class="fas fa-times"></i></button>
-            <h4>Pedidos de Diseños</h4>
-            <input type="month" id="web-month" onchange="showActivities('web')">
-            <p>Mes seleccionado: <span id="web-selected-month"></span></p>
-            <button class="btn btn-success" onclick="downloadPDF('web')">Descargar PDF</button>
-            <div id="web-activities-table">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Diseños</th>
-                            <th>Link</th>
-                        </tr>
-                    </thead>
-                    <tbody id="web-activities-body"></tbody>
-                </table>
-            </div>
-            <div class="chart-container">
-                <canvas id="webChart"></canvas>
-            </div>
-        </div>
-
-       
-
     </div>
     <script>
-        const { jsPDF } = window.jspdf;
-    
-        const dataGrafica = {
-            labels: Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
-            datasets: [{
-                label: 'Pedidos Folletos',
-                data: [12, 19, 3, 5, 2, 3, 9, 10, 8, 12, 15, 7],
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
-                lineTension: 0.4
-            }]
+        const programacion = {
+            'Pedidos por áreas': [
+                {fecha: '2024-10-22', detalle: 'Diseño de Cartel Fizcalización', link: '#'},
+                {fecha: '2024-10-24', detalle: 'Logo Personal', link: '#'}
+            ],
+            'Folletería': [
+                {fecha: '2024-10-15', detalle: 'Dengue Salud 10.000', link: '#'},
+                {fecha: '2024-10-20', detalle: 'Dengue Educación 10.000', link: '#'}
+            ]
         };
-    
-        const dataWeb = {
-            labels: Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
-            datasets: [{
-                label: 'Pedidos Diseños',
-                data: [6, 11, 7, 8, 10, 5, 12, 15, 6, 9, 11, 10],
-                borderColor: 'rgba(153, 102, 255, 1)',
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                fill: true,
-                lineTension: 0.4
-            }]
+        let selectedType = 'Pedidos por áreas';
+        const defaultMonth = new Date().toISOString().slice(0, 7);
+
+        window.onload = () => {
+            document.getElementById('selected-type').innerText = selectedType;
+            loadTable();
+            updateChart();
         };
-    
-        const dataAudiovisual = {
-            labels: Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
-            datasets: [{
-                label: 'Actividades Audiovisuales',
-                data: [5, 3, 4, 6, 9, 1, 7, 5, 3, 6, 8, 4],
-                borderColor: 'rgba(255, 159, 64, 1)',
-                backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                fill: true,
-                lineTension: 0.4
-            }]
-        };
-    
-        let graficaChart;
-        let webChart;
-        let audiovisualChart;
-    
+
         function showCalendar(type) {
-            document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
-            document.getElementById(`${type}-calendar`).style.display = 'block';
-    
-            if (type === 'grafica') {
-                if (!graficaChart) {
-                    graficaChart = createChart('graficaChart', dataGrafica);
-                }
-            } else if (type === 'web') {
-                if (!webChart) {
-                    webChart = createChart('webChart', dataWeb);
-                }
-            } else if (type === 'audiovisual') {
-                if (!audiovisualChart) {
-                    audiovisualChart = createChart('audiovisualChart', dataAudiovisual);
-                }
+            selectedType = type;
+            document.getElementById('calendar').style.display = 'block';
+            document.getElementById('selected-type').innerText = type;
+            document.getElementById('chart-title').innerText = `Actividades: ${type}`;
+            loadTable();
+            updateChart();
+        }
+
+        function loadTable() {
+            const table = document.getElementById('schedule-table');
+            const selectedMonth = document.getElementById('calendar-month').value;
+            table.innerHTML = '';
+            if (!selectedMonth) {
+                document.querySelector('.export-button').style.display = 'none';
+                return;
+            }
+            const selectedYearMonth = selectedMonth.split('-').join('-');
+            if (programacion[selectedType]) {
+                let hasEvents = false;
+                programacion[selectedType].forEach(evento => {
+                    if (evento.fecha.startsWith(selectedYearMonth)) {
+                        const newRow = document.createElement('tr');
+                        newRow.innerHTML = `<td>${evento.fecha}</td><td>${evento.detalle}</td><td>${evento.link}</td>`;
+                        table.appendChild(newRow);
+                        hasEvents = true;
+                    }
+                });
+                document.querySelector('.export-button').style.display = hasEvents ? 'block' : 'none';
             }
         }
-    
-        function createChart(canvasId, data) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            return new Chart(ctx, {
+
+        function removeAllRows(type) {
+            const table = document.getElementById('schedule-table');
+            table.innerHTML = '';
+            document.querySelector('.export-button').style.display = 'none';
+        }
+
+        async function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const selectedMonth = document.getElementById('calendar-month').value;
+            doc.text(`Actividades del Mes: ${selectedMonth}`, 10, 10);
+            const chartCanvas = document.getElementById('myChart');
+            const imgData = chartCanvas.toDataURL('image/png');
+            doc.addImage(imgData, 'PNG', 10, 20, 180, 100);
+            const tableRows = [];
+            document.querySelectorAll('#schedule-table tr').forEach(row => {
+                const columns = [];
+                row.querySelectorAll('td').forEach(cell => columns.push(cell.innerText));
+                tableRows.push(columns);
+            });
+            doc.autoTable({ head: [['Fecha', 'Detalle', 'Link']], body: tableRows, startY: 130 });
+            doc.save(`actividades_${selectedType}_${selectedMonth}.pdf`);
+        }
+
+        let chart;
+        function updateChart() {
+            const data = { 
+                'Pedidos por áreas': [10, 15, 9, 6, 12, 8, 14, 5, 7, 6, 8, 9], 
+                'Folletería': [5, 7, 12, 6, 8, 11, 15, 7, 9, 4, 10, 6] 
+            };
+
+            if (chart) { 
+                chart.destroy(); 
+            }
+
+            let borderColor;
+            let backgroundColor;
+
+            if (selectedType === 'Pedidos por áreas') {
+                borderColor = '#4CAF50';
+                backgroundColor = 'rgba(76, 175, 80, 0.2)';
+            } else if (selectedType === 'Folletería') {
+               
+                backgroundColor = 'rgba(255, 64, 129, 0.2)';
+                borderColor = '#FF4081';
+            }
+
+            chart = new Chart(document.getElementById('myChart'), {
                 type: 'line',
-                data: data,
+                data: { 
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sept', 'Oct', 'Nov', 'Dic'], 
+                    datasets: [{ 
+                        label: ' Cantidad Mensual', 
+                        data: data[selectedType], 
+                        borderColor: borderColor,
+                        backgroundColor: backgroundColor,
+                        fill: true
+                    }]
+                },
                 options: {
                     responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                color: '#000000', // Letras en negro
-                                font: {
-                                    weight: 'bold', // Letras en negrita
-                                    size: 14 // Aumentar tamaño de fuente
-                                }
-                            }
-                        },
-                        x: {
-                            ticks: {
-                                color: '#000000', // Letras en negro
-                                font: {
-                                    weight: 'bold', // Letras en negrita
-                                    size: 14 // Aumentar tamaño de fuente
-                                }
-                            }
-                        }
+                    scales: { 
+                        y: { beginAtZero: true, 
+                            ticks: { color: 'black' },
+                         },
+                         x: {
+                    ticks: {
+                        color: 'black', // Color oscuro para el texto de los ejes
                     },
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: '#000000', // Letras en negro para la leyenda
-                                font: {
-                                    weight: 'bold', // Letras en negrita para la leyenda
-                                    size: 16 // Aumentar tamaño de fuente de la leyenda
-                                }
-                            }
-                        }
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)', // Color claro para las líneas de la rejilla
+                    }
+                }
                     }
                 }
             });
         }
-    
-        function showActivities(type) {
-            const selectedMonth = document.getElementById(`${type}-month`).value;
-            const monthName = new Date(selectedMonth).toLocaleString('default', { month: 'long' });
-            document.getElementById(`${type}-selected-month`).textContent = monthName;
-    
-            const tbody = document.getElementById(`${type}-activities-body`);
-            tbody.innerHTML = '';
-    
-            for (let i = 1; i <= 5; i++) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${monthName}-0${-i}</td>
-                    <td>Pedido${i}</td>
-                    <td><a href="#">Link ${i}</a></td>
-                `;
-                tbody.appendChild(row);
-            }
-        }
-    
-        async function downloadPDF(type) {
-            const doc = new jsPDF();
-            const selectedMonth = document.querySelector(`#${type}-selected-month`).textContent;
-    
-            // Agregar el título
-            doc.text(`Actividades del Mes: ${selectedMonth}`, 10, 10);
-    
-            // Capturar el gráfico
-            const canvas = document.getElementById(`${type}Chart`);
-            const imgData = canvas.toDataURL('image/png');
-            doc.addImage(imgData, 'PNG', 10, 20, 180, 100); // Ajustar el tamaño según sea necesario
-    
-            // Agregar la tabla
-            doc.autoTable({
-                head: [['Fecha', 'Lugar', 'Link']],
-                body: Array.from(document.querySelectorAll(`#${type}-activities-body tr`)).map(row => Array.from(row.children).map(cell => cell.innerText)),
-                startY: 130 // Ajustar la posición para que no se superponga con el gráfico
-            });
-    
-            // Guardar el PDF
-            doc.save(`${type}-actividades-${selectedMonth}.pdf`);
-        }
-    
-        function closeCalendar(type) {
-            document.getElementById(`${type}-calendar`).style.display = 'none';
-        }
-        
     </script>
-    
 </body>
-
 </html>
+

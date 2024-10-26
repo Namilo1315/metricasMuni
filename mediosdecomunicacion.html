@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPOR DE RADIO</title>
+    <title>Calendario de Actividades</title>
     <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -17,34 +17,36 @@
         .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: -10px; }
         .graph-container { height: 390px; }
         .button-group { display: flex; justify-content: space-between; }
-        .button-group button { width: 48%; }
+        .button-group button { width: 32%; }
         .export-button { margin-top: 15px; display: none; }
         .titulos{
-            font-size: 32px;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            color: #000000;
-            text-decoration: underline;
-            text-decoration-color: orange;
-            text-decoration-thickness: 5px;
-        }
+    font-size: 32px;
+  margin-bottom: 40px;
+    text-transform: uppercase;
+    color:#000000;
+    text-decoration: underline;
+    text-decoration-color: orange;
+    text-decoration-thickness: 5px;
+}
     </style>
 </head>
 <body>
     <div class="container mt-2">
         <div class="panel-header">
-            <h1>Panel de Control - SPOT DE RADIO</h1>
+            <h1>Panel de Control - Medios de Comunicación</h1>
             <img src="./imagenes/logo.png" alt="Imagen" class="img-fluid" style="width: 80px;">
         </div>
         <hr>
         <div class="container1">
-            <h2 class="text-center titulos mt-1">SPOT DE RADIO</h2>
+            <h2 class="text-center  titulos mt-1"> Medios de Comunicación</h2>
+           
             <div class="media-section">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="button-group mb-4">
-                            <button class="btn btn-primary fw-bold" onclick="showCalendar('Campañas')">CAMPAÑAS</button>
-                            <button class="btn btn-primary fw-bold" onclick="showCalendar('Medios')">MEDIOS</button>
+                            <button class="btn btn-primary" onclick="showCalendar('Gráficas')">Gráficas</button>
+                            <button class="btn btn-primary" onclick="showCalendar('Web')">Web</button>
+                            <button class="btn btn-primary" onclick="showCalendar('Audiovisual')">Audiovisual</button>
                         </div>
                         <div id="calendar" style="display: block;">
                             <h3 id="selected-type"></h3>
@@ -69,7 +71,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="graph-container">
-                            <h3 class="text-center" id="chart-title">Actividades Campañas</h3>
+                            <h3 class="text-center" id="chart-title">Activides Gráficas</h3>
                             <canvas id="myChart"></canvas>
                         </div>
                     </div>
@@ -79,17 +81,23 @@
     </div>
     <script>
         const programacion = {
-            'Campañas': [
-                {fecha: '2024-10-22', detalle: 'Dengue', link: '#'},
-                {fecha: '2024-10-24', detalle: 'Dengue', link: '#'}
+            'Gráficas': [
+                {fecha: '2024-10-22', detalle: '+ Diario', link: '#'},
+                {fecha: '2024-10-24', detalle: '- Uno', link: '#'},
+                {fecha: '2024-10-24', detalle: '* Los Andes', link: '#'}
             ],
-            'Medios': [
-                {fecha: '2024-10-15', detalle: 'FM', link: '#'},
-                {fecha: '2024-10-20', detalle: 'Entrevista en Radio', link: '#'}
+            'Web': [
+                {fecha: '2024-10-15', detalle: 'Blog', link: '#'},
+                {fecha: '2024-10-20', detalle: 'Página Web', link: '#'}
+            ],
+            'Audiovisual': [
+                {fecha: '2024-10-12', detalle: 'Video', link: '#'},
+                {fecha: '2024-10-18', detalle: 'Podcast', link: '#'}
             ]
         };
-        let selectedType = 'Campañas';
-        const defaultMonth = new Date().toISOString().slice(0, 7);
+        let selectedType = 'Gráficas'; // Set the default type
+        const defaultMonth = new Date().toISOString().slice(0, 7); // Get the current month in YYYY-MM format
+       // document.getElementById('calendar-month').value = defaultMonth; // Set the input to the current month
 
         window.onload = () => {
             document.getElementById('selected-type').innerText = selectedType;
@@ -155,46 +163,57 @@
 
         let chart;
         function updateChart() {
-            const data = { 
-                'Campañas': [10, 15, 9, 6, 12, 8, 14, 5, 7, 6, 8, 9], 
-                'Medios': [5, 7, 12, 6, 8, 11, 15, 7, 9, 4, 10, 6] 
-            };
+    const data = { 
+        'Gráficas': [121, 45, 25, 17, 27, 27, 26, 14, 14, 15, 12, 10], 
+        'Web': [3, 1, 2, 4, 5, 6, 7, 8, 9, 10, 15, 16], 
+        'Audiovisual': [5, 4, 3, 7, 8, 2, 6, 9, 8, 7, 6, 6] 
+    };
 
-            if (chart) { 
-                chart.destroy(); 
-            }
+    if (chart) { 
+        chart.destroy(); 
+    }
 
-            let borderColor;
-            let backgroundColor;
+    let borderColor;
+    let backgroundColor;
 
-            if (selectedType === 'Campañas') {
-                backgroundColor = 'rgba(255, 64, 129, 0.2)';
-                borderColor = '#FF4081';
-            } else if (selectedType === 'Medios') {
-                borderColor = '#43A047';
-backgroundColor = 'rgba(67, 160, 71, 0.4)';
+    // Establecer colores según el tipo de gráfico
+    if (selectedType === 'Gráficas') {
+        borderColor = '#FF5722'; // Rosa
+        backgroundColor = 'rgba(255, 87, 34, 0.2)';
+    } else if (selectedType === 'Web') {
+        borderColor = '#4CAF50'; // Verde
+        backgroundColor = 'rgba(76, 175, 80, 0.2)';
+    } else if (selectedType === 'Audiovisual') {
+        borderColor = '#2196F3'; // Azul
+        backgroundColor = 'rgba(33, 150, 243, 0.2)';
+    }
 
-            }
-
-            chart = new Chart(document.getElementById('myChart'), {
-                type: 'line',
-                data: { 
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sept', 'Oct', 'Nov', 'Dic'], 
-                    datasets: [{ 
-                        label: ' Cantidad Mensual', 
-                        data: data[selectedType], 
-                        borderColor: borderColor,
-                        backgroundColor: backgroundColor,
-                        fill: true
-                    }]
+    chart = new Chart(document.getElementById('myChart'), {
+        type: 'line',
+        data: { 
+            labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sept', 'Oct', 'Nov', 'Dic'], 
+            datasets: [{ 
+                label: ' Cantidad Mensual', 
+                data: data[selectedType], 
+                borderColor: borderColor,
+                backgroundColor: backgroundColor,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'black', // Color oscuro para el texto de los ejes
+                        
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)', // Color claro para las líneas de la rejilla
+                    }
                 },
-                options: {
-                    responsive: true,
-                    scales: { 
-                        y: { beginAtZero: true, 
-                            ticks: { color: 'black' },
-                         },
-                         x: {
+                x: {
                     ticks: {
                         color: 'black', // Color oscuro para el texto de los ejes
                     },
@@ -202,10 +221,19 @@ backgroundColor = 'rgba(67, 160, 71, 0.4)';
                         color: 'rgba(0, 0, 0, 0.1)', // Color claro para las líneas de la rejilla
                     }
                 }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'black', // Color del texto de la leyenda
+                        
                     }
                 }
-            });
+            }
         }
+    });
+}
+
     </script>
 </body>
 </html>
