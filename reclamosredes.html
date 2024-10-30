@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Mensual de Reclamos</title>
+
+    <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #ffffff, #ffffff);
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #00a6ff;
+            color: white;
+            padding: 1.0rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom-left-radius: 50% 20px;
+            border-bottom-right-radius: 50% 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Introducción */
+        .intro-text {
+            background-color: #f3f3f3;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .intro-text p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        /* Botones de Meses */
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            max-width: 1000px;
+            margin: auto;
+            padding: 1.5rem 1rem;
+        }
+
+        .boton-mes {
+            width: 150px;
+            padding: 0.8rem;
+            font-weight: 600;
+            background-color: rgb(66, 162, 66);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .boton-mes:hover {
+            background-color: rgba(50, 130, 50, 0.9);
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-highlight {
+            background-color: #ff9800;
+            color: #ffffff !important;
+        }
+
+        .btn-highlight:hover {
+            background-color: #ff990080 !important;
+            color: #ffffff !important;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333333de;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: auto;
+            margin-bottom: 0;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        footer p {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* Botón de volver al inicio */
+        .btn-home {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .btn-home:hover {
+            color: #ffffff; /* Color al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botón de volver al inicio -->
+    <a href="./ooo.html" class="btn-home" title="Volver al inicio">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <h1>Reporte Mensual de Reclamos</h1>
+        <p>Informe de reclamos recibidos en redes sociales</p>
+    </header>
+
+    <!-- Introducción -->
+    <section class="intro-text container text-center">
+        <p>En el formulario mensual se analizan los reclamos recibidos en las redes sociales, de las cuentas de Facebook e Instagram de Matías Stevanato y Maipú Municipio. En el mismo se detallan cantidades, porcentajes, las zonas, el área del reclamo, las derivaciones y el tono de los mensajes recibidos. A fin de poder encontrar a través de constantes métricas el pedido de nuestros vecinos y así poder darle prioridad a la resolución.</p>
+    </section>
+  
+    <!-- Sección de Botones de Meses -->
+    <section class="btn-container container">
+        <a href="./imagenes/formulario febrero.pdf" target="_blank"><button class="btn boton-mes">FEBRERO</button></a>
+        <a href="./imagenes/formulario Marzo.pdf" target="_blank"><button class="btn boton-mes">MARZO</button></a>
+        <a href="./imagenes/formulario Abril.pdf" target="_blank"><button class="btn boton-mes">ABRIL</button></a>
+        <a href="./imagenes/Formulario Mayo.pdf" target="_blank"><button class="btn boton-mes">MAYO</button></a>
+        <a href="./imagenes/Formulario Junio.pdf" target="_blank"><button class="btn boton-mes">JUNIO</button></a>
+        <a href="./imagenes/Formulario julio.pdf" target="_blank"><button class="btn boton-mes">JULIO</button></a>
+        <a href="./imagenes/Formulario Agosto.pdf" target="_blank"><button class="btn boton-mes">AGOSTO</button></a>
+        <a href="./imagenes/Formulario Septiembre.pdf" target="_blank"><button class="btn boton-mes btn-highlight">SEPTIEMBRE</button></a>
+        <button class="btn boton-mes">OCTUBRE</button>
+        <button class="btn boton-mes">NOVIEMBRE</button>
+        <button class="btn boton-mes">DICIEMBRE</button>
+        <a href="./imagenes/comparativo.pdf" target="_blank"><button class="btn btn-highlight fw-bold mt-2 boton">COMPARATIVO</button></a>
+        <a href="./imagenes/reclamos repetidos septiembre.jpeg" target="_blank"><button class="btn btn-highlight fw-bold mt-2 boton">REINCIDENTES</button></a>
+        <a href="./todo.html" target="_blank"><button class="btn btn-highlight fw-bold mt-2 boton">GRAFICOS</button></a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Dirección de Comunicación - Todos los derechos reservados © - NL</p>
+    </footer>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+  

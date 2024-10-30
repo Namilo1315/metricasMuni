@@ -1,712 +1,185 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./estilo.css">
-    <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
-    <title>Medios de Comunicación</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        .calendar-container {
-            margin-top: 20px;
-            display: none; /* Ocultamos la sección del calendario por defecto */
-        }
-
-        .table-responsive {
-            display: none; /* Ocultamos la tabla por defecto */
-        }
-
-        .calendar-container h4 {
-            font-size: 1.2rem; /* Tamaño del título del calendario */
-        }
-
-        .form-control {
-            width: 150px; /* Tamaño del input de fecha */
-            margin-bottom: 10px; /* Espacio entre el input y la tabla */
-        }
-
-        .close-btn {
-            margin-bottom: 10px; /* Espacio entre el botón de cerrar y la tabla */
-        }
-
-        #chart-container {
-            display: none; /* Ocultar gráfico por defecto */
-            margin-top: 20px; /* Espacio superior del gráfico */
-        }
-    </style>
-</head>
-
-<body>
-    <header>
-        <div class="container my-3">
-            <div class="row">
-                <div class="col-md-1">
-                    <a href="./index.html"><img src="./imagenes/logo.png" alt="" width="70px"></a>
-                </div>
-                <div class="col-md-11">
-                    <h1 class="text-center mb-4 fw-bold" id="panel">Panel de Control - Comunicación</h1>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class="container my-4">
-        <h2 class="mb-4">Medios de Comunicación</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card text-center mb-4">
-                    <div class="card-body">
-                        <h3 class="card-title">Gráfica</h3>
-                        <p class="card-text">Información sobre medios gráficos, carteles, folletos y más.</p>
-                        <button class="btn btn-primary" onclick="showCalendar('grafica')">Ver Calendario</button>
-                    </div>
-                </div>
-                <div class="calendar-container" id="grafica-calendar">
-                    <h4>Calendario de Actividades - Gráfica</h4>
-                    <input type="date" class="form-control" onchange="showActivities('grafica')">
-                    <button class="btn btn-danger close-btn" onclick="closeCalendar('grafica')">Cerrar</button>
-                    <div class="table-responsive" id="grafica-activities-table">
-                        <h5>Actividades del <span id="grafica-selected-date"></span></h5>
-                        <table class="table table-bordered mt-3">
-                            <thead>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>Lugar</th>
-                                    <th>Link</th>
-                                </tr>
-                            </thead>
-                            <tbody id="grafica-activities-body">
-                                <!-- Aquí se llenarán las actividades -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-center mb-4">
-                    <div class="card-body">
-                        <h3 class="card-title">Web</h3>
-                        <p class="card-text">Detalles sobre el contenido digital y su estrategia online.</p>
-                        <button class="btn btn-primary" onclick="showCalendar('web')">Ver Calendario</button>
-                    </div>
-                </div>
-                <div class="calendar-container" id="web-calendar">
-                    <h4>Calendario de Actividades - Web</h4>
-                    <input type="date" class="form-control" onchange="showActivities('web')">
-                    <button class="btn btn-danger close-btn" onclick="closeCalendar('web')">Cerrar</button>
-                    <div class="table-responsive" id="web-activities-table">
-                        <h5>Actividades del <span id="web-selected-date"></span></h5>
-                        <table class="table table-bordered mt-3">
-                            <thead>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>Lugar</th>
-                                    <th>Link</th>
-                                </tr>
-                            </thead>
-                            <tbody id="web-activities-body">
-                                <!-- Aquí se llenarán las actividades -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-center mb-4">
-                    <div class="card-body">
-                        <h3 class="card-title">Audiovisual</h3>
-                        <p class="card-text">Proyectos de videos, spots y otras producciones audiovisuales.</p>
-                        <button class="btn btn-primary" onclick="showCalendar('audiovisual')">Ver Calendario</button>
-                    </div>
-                </div>
-                <div class="calendar-container" id="audiovisual-calendar">
-                    <h4>Calendario de Actividades - Audiovisual</h4>
-                    <input type="date" class="form-control" onchange="showActivities('audiovisual')">
-                    <button class="btn btn-danger close-btn" onclick="closeCalendar('audiovisual')">Cerrar</button>
-                    <div class="table-responsive" id="audiovisual-activities-table">
-                        <h5>Actividades del <span id="audiovisual-selected-date"></span></h5>
-                        <table class="table table-bordered mt-3">
-                            <thead>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>Lugar</th>
-                                    <th>Link</th>
-                                </tr>
-                            </thead>
-                            <tbody id="audiovisual-activities-body">
-                                <!-- Aquí se llenarán las actividades -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sección para mostrar el gráfico -->
-        <div id="chart-container">
-            <h4>Gráfico de Actividades</h4>
-            <canvas id="activitiesChart" width="400" height="200"></canvas>
-        </div>
-    </main>
-
-    <footer class="bg-primary text-center py-4">
-        <p class="mb-0">Municipalidad de Maipú - Área de Comunicación © 2024</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Datos de ejemplo para actividades
-        const activitiesData = {
-            "grafica": {
-                "2024-10-23": [
-                    { fecha: "2024-10-23", lugar: "Sala de Prensa", link: "http://example.com/grafica1" },
-                    { fecha: "2024-10-23", lugar: "Oficina Central", link: "http://example.com/grafica2" },
-                ],
-                "2024-10-24": [
-                    { fecha: "2024-10-24", lugar: "Estudio Gráfico", link: "http://example.com/grafica3" },
-                ]
-            },
-            "web": {
-                "2024-10-23": [
-                    { fecha: "2024-10-23", lugar: "Oficina de Desarrollo", link: "http://example.com/web1" },
-                ],
-                "2024-10-24": [
-                    { fecha: "2024-10-24", lugar: "Sala de Reuniones", link: "http://example.com/web2" },
-                ]
-            },
-            "audiovisual": {
-                "2024-10-23": [
-                    { fecha: "2024-10-23", lugar: "Estudio Audiovisual", link: "http://example.com/audiovisual1" },
-                ],
-                "2024-10-24": [
-                    { fecha: "2024-10-24", lugar: "Salón de Eventos", link: "http://example.com/audiovisual2" },
-                ]
-            }
-        };
-
-        function closeCalendar(section) {
-            const calendarContainer = document.getElementById(section + "-calendar");
-            calendarContainer.style.display = "none"; // Oculta el calendario
-            const activitiesTable = document.getElementById(section + "-activities-table");
-            activitiesTable.style.display = "none"; // Oculta la tabla
-            document.getElementById("chart-container").style.display = "none"; // Oculta el gráfico
-        }
-
-        function showCalendar(section) {
-            // Oculta todas las secciones de calendario
-            document.querySelectorAll(".calendar-container").forEach(container => {
-                container.style.display = "none";
-            });
-            // Oculta el gráfico
-            document.getElementById("chart-container").style.display = "none";
-
-            // Muestra la sección del calendario seleccionada
-            const calendarContainer = document.getElementById(section + "-calendar");
-            calendarContainer.style.display = "block"; // Muestra el calendario
-        }
-
-        function showActivities(section) {
-            const calendarContainer = document.getElementById(section + "-calendar");
-            const selectedDate = calendarContainer.querySelector("input[type='date']").value;
-            const activitiesBody = document.getElementById(section + "-activities-body");
-            const activitiesTable = document.getElementById(section + "-activities-table");
-            const selectedDateSpan = document.getElementById(section + "-selected-date");
-
-            selectedDateSpan.textContent = selectedDate; // Muestra la fecha seleccionada
-
-            // Obtiene las actividades para la fecha seleccionada
-            const activities = activitiesData[section][selectedDate] || [];
-
-            activitiesBody.innerHTML = ""; // Limpia las actividades previas
-            if (activities.length > 0) {
-                activities.forEach(activity => {
-                    const row = `<tr>
-                        <td>${activity.fecha}</td>
-                        <td>${activity.lugar}</td>
-                        <td><a href="${activity.link}" target="_blank">Link</a></td>
-                    </tr>`;
-                    activitiesBody.innerHTML += row;
-                });
-                activitiesTable.style.display = "block"; // Muestra la tabla
-                document.getElementById("chart-container").style.display = "block"; // Muestra el gráfico
-                updateChart(section, activities); // Actualiza el gráfico
-            } else {
-                activitiesBody.innerHTML = "<tr><td colspan='3'>No hay actividades para esta fecha.</td></tr>";
-                activitiesTable.style.display = "block"; // Muestra la tabla
-            }
-        }
-
-        function updateChart(section, activities) {
-            const ctx = document.getElementById('activitiesChart').getContext('2d');
-            const labels = activities.map(activity => activity.lugar);
-            const data = Array(labels.length).fill(1); // Supongamos que cada lugar tiene 1 actividad
-
-            const chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Actividades',
-                        data: data,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-    </script>
-</body>
-
-</html>
-
-<!-- Sección 3: Diseños 
-        <div class="text-center mb-3">
-            <button class="btn btn-primary" onclick="showCalendar('grafica')">Gráfica</button>
-            <button class="btn btn-primary" onclick="showCalendar('web')">Web</button>
-            <button class="btn btn-primary" onclick="showCalendar('audiovisual')">Audiovisual</button>
-        </div>
-   
-<script>
-    const { jsPDF } = window.jspdf;
-
-    const dataGrafica = {
-        labels: Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
-        datasets: [{
-            label: 'Actividades Gráficas',
-            data: [12, 19, 3, 5, 2, 3, 9, 10, 8, 12, 15, 7],
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            fill: true,
-            lineTension: 0.4
-        }]
-    };
-
-    const dataWeb = {
-        labels: Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
-        datasets: [{
-            label: 'Actividades Web',
-            data: [6, 11, 7, 8, 10, 5, 12, 15, 6, 9, 11, 10],
-            borderColor: 'rgba(153, 102, 255, 1)',
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            fill: true,
-            lineTension: 0.4
-        }]
-    };
-
-    const dataAudiovisual = {
-        labels: Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
-        datasets: [{
-            label: 'Actividades Audiovisuales',
-            data: [5, 3, 4, 6, 9, 1, 7, 5, 3, 6, 8, 4],
-            borderColor: 'rgba(255, 159, 64, 1)',
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            fill: true,
-            lineTension: 0.4
-        }]
-    };
-
-    let graficaChart;
-    let webChart;
-    let audiovisualChart;
-
-    function showCalendar(type) {
-        document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
-        document.getElementById(`${type}-calendar`).style.display = 'block';
-
-        if (type === 'grafica') {
-            if (!graficaChart) {
-                graficaChart = createChart('graficaChart', dataGrafica);
-            }
-        } else if (type === 'web') {
-            if (!webChart) {
-                webChart = createChart('webChart', dataWeb);
-            }
-        } else if (type === 'audiovisual') {
-            if (!audiovisualChart) {
-                audiovisualChart = createChart('audiovisualChart', dataAudiovisual);
-            }
-        }
-    }
-
-    function createChart(canvasId, data) {
-        const ctx = document.getElementById(canvasId).getContext('2d');
-        return new Chart(ctx, {
-            type: 'line',
-            data: data,
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: '#000000', // Letras en negro
-                            font: {
-                                weight: 'bold', // Letras en negrita
-                                size: 14 // Aumentar tamaño de fuente
-                            }
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            color: '#000000', // Letras en negro
-                            font: {
-                                weight: 'bold', // Letras en negrita
-                                size: 14 // Aumentar tamaño de fuente
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#000000', // Letras en negro para la leyenda
-                            font: {
-                                weight: 'bold', // Letras en negrita para la leyenda
-                                size: 16 // Aumentar tamaño de fuente de la leyenda
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    function showActivities(type) {
-        const selectedMonth = document.getElementById(`${type}-month`).value;
-        const monthName = new Date(selectedMonth).toLocaleString('default', { month: 'long' });
-        document.getElementById(`${type}-selected-month`).textContent = monthName;
-
-        const tbody = document.getElementById(`${type}-activities-body`);
-        tbody.innerHTML = '';
-
-        for (let i = 1; i <= 5; i++) {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${monthName}-0${i}</td>
-                <td>Lugar ${i}</td>
-                <td><a href="#">Link ${i}</a></td>
-            `;
-            tbody.appendChild(row);
-        }
-    }
-
-    async function downloadPDF(type) {
-        const doc = new jsPDF();
-        const selectedMonth = document.querySelector(`#${type}-selected-month`).textContent;
-
-        // Agregar el título
-        doc.text(`Actividades del Mes: ${selectedMonth}`, 10, 10);
-
-        // Capturar el gráfico
-        const canvas = document.getElementById(`${type}Chart`);
-        const imgData = canvas.toDataURL('image/png');
-        doc.addImage(imgData, 'PNG', 10, 20, 180, 100); // Ajustar el tamaño según sea necesario
-
-        // Agregar la tabla
-        doc.autoTable({
-            head: [['Fecha', 'Lugar', 'Link']],
-            body: Array.from(document.querySelectorAll(`#${type}-activities-body tr`)).map(row => Array.from(row.children).map(cell => cell.innerText)),
-            startY: 130 // Ajustar la posición para que no se superponga con el gráfico
-        });
-
-        // Guardar el PDF
-        doc.save(`${type}-actividades-${selectedMonth}.pdf`);
-    }
-
-    function closeCalendar(type) {
-        document.getElementById(`${type}-calendar`).style.display = 'none';
-    }
-    
-</script> -->
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario de Actividades</title>
+    <title>Dirección de Comunicación</title>
+    
     <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
     <style>
-        body {
-            background-color: #ffffff;
-            color: #333; /* Color de letra más oscuro */
-        }
+        /* Estilos Generales */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
 
-        .calendar-container {
-            width: 80%;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.498);
-        }
-
-        h2 {
+        /* Header */
+        header {
+            background-color: #00a6ff;
+            color: white;
+            padding: 1rem 1rem;
             text-align: center;
-            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom-left-radius: 50% 20px;
+            border-bottom-right-radius: 50% 20px;
         }
 
-        .chart-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
+        /* Introducción */
+        .intro-text {
+            background-color: #f3f3f3;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.383);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
         }
 
-        .chart-container canvas {
-            max-width: 800px;
-            height: auto;
+        /* Títulos y Estilos de Sección */
+        h1, h2 {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
         }
 
-        .btn-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            display: none;
+        h2 i {
+            margin-right: 8px;
         }
 
-        .section {
-            display: none;
-        }
-
+        /* Estilos de Tarjetas */
         .card {
-            transition: transform 0.3s; /* Duración de la transición */
+            border: none;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.602);
+            transition: transform 0.2s ease;
+            padding: .5rem;
         }
 
         .card:hover {
-            transform: scale(1.05); /* Escala al 105% al pasar el mouse */
+            transform: translateY(-10px);
+        }
+
+        /* Colores de Tarjetas */
+        .bg-primary {
+            background-color: #004a9f !important;
+        }
+
+        .bg-info {
+            background-color: #17a2b8 !important;
+        }
+
+        .bg-warning {
+            background-color: #ff9800 !important;
+        }
+
+        footer {
+            background-color: #333333de;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .hola {
+            background-color: #ff9800;
+        }
+
+        /* Estilos de iconos */
+        .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .boton{
+        background-color: rgb(66, 162, 66);
+        color: white;
+        font-weight: 600;
+        }
+        .boton:hover{
+        background-color: rgb(27, 90, 27);
+        color: white;
+        font-weight: 700;
         }
     </style>
 </head>
-
 <body>
-    <div class="container my-4">
-        <div class="row">
-            <div class="col-md-1">
-                <a href="./control.html"><img src="./imagenes/logo.png" alt="" width="70px"></a>
-            </div>
-            <div class="col-md-11">
-                <h1 class="text-center mb-4 fw-bold" id="panel">Calendario de Actividades</h1>
-            </div>
-        </div>
-        <div class="container mt-2">
-            <div class="row g-4">
-                <!-- Sección 1: Medios de Comunicación -->
-                <div class="col-md-4">
-                    <div class="card h-100 text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">GRAFICA</h5>
-                            <p class="card-text">Gráfica - Web - Audiovisual</p>
-                            <button class="btn btn-primary" onclick="showCalendar('grafica')">Ver detalles</button>
-                        </div>
-                    </div>
-                </div>
+    <!-- Header -->
+    <header>
+        <h1>Dirección de Comunicación</h1>
+        <p class="fs-5">Informe anual de métricas y actividades</p>
+    </header>
 
-                <!-- Sección 2: Campaña Vía Pública -->
-                <div class="col-md-4">
-                    <div class="card h-100 text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">SITIOS WEB</h5>
-                            <p class="card-text">Inicio de Campaña</p>
-                            <button class="btn btn-primary" onclick="showCalendar('web')">Ver detalles</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sección 3: Diseños -->
-                <div class="col-md-4">
-                    <div class="card h-100 text-center shadow">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">AUDIO</h5>
-                            <p class="card-text">Pedido por Área - Folletos</p>
-                            <button class="btn btn-primary" onclick="showCalendar('audiovisual')">Ver detalles</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="grafica-calendar" class="calendar-container section">
-            <button class="btn-close" onclick="closeCalendar('grafica')"><i class="fas fa-times"></i></button>
-            <h4>Actividades Gráficas</h4>
-            <input type="month" id="grafica-month" onchange="showActivities('grafica')">
-            <p>Mes seleccionado: <span id="grafica-selected-month"></span></p>
-            <button class="btn btn-success" onclick="downloadPDF('grafica')">Descargar PDF</button>
-            <div id="grafica-activities-table">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Lugar</th>
-                            <th>Link</th>
-                        </tr>
-                    </thead>
-                    <tbody id="grafica-activities-body"></tbody>
-                </table>
-            </div>
-            <div class="chart-container">
-                <canvas id="graficaChart"></canvas>
-            </div>
-        </div>
-
-        <div id="web-calendar" class="calendar-container section">
-            <button class="btn-close" onclick="closeCalendar('web')"><i class="fas fa-times"></i></button>
-            <h4>Actividades Web</h4>
-            <input type="month" id="web-month" onchange="showActivities('web')">
-            <p>Mes seleccionado: <span id="web-selected-month"></span></p>
-            <button class="btn btn-success" onclick="downloadPDF('web')">Descargar PDF</button>
-            <div id="web-activities-table">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Lugar</th>
-                            <th>Link</th>
-                        </tr>
-                    </thead>
-                    <tbody id="web-activities-body"></tbody>
-                </table>
-            </div>
-            <div class="chart-container">
-                <canvas id="webChart"></canvas>
-            </div>
-        </div>
-
-        <div id="audiovisual-calendar" class="calendar-container section">
-            <button class="btn-close" onclick="closeCalendar('audiovisual')"><i class="fas fa-times"></i></button>
-            <h4>Actividades Audiovisuales</h4>
-            <input type="month" id="audiovisual-month" onchange="showActivities('audiovisual')">
-            <p>Mes seleccionado: <span id="audiovisual-selected-month"></span></p>
-            <button class="btn btn-success" onclick="downloadPDF('audiovisual')">Descargar PDF</button>
-            <div id="audiovisual-activities-table">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Lugar</th>
-                            <th>Link</th>
-                        </tr>
-                    </thead>
-                    <tbody id="audiovisual-activities-body"></tbody>
-                </table>
-            </div>
-            <div class="chart-container">
-                <canvas id="audiovisualChart"></canvas>
-            </div>
-        </div>
-
+    <!-- Introducción -->
+    <div class="container intro-text">
+        <p class="fw-bold">Desde el área de Comunicación, se han evaluado métricas claves, considerando la interacción en redes sociales, los reclamos recibidos y las actividades desarrolladas por el equipo, ajustadas a las necesidades de cada área.</p>
     </div>
 
-    <script>
-        const { jsPDF } = window.jspdf;
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark hola">
+        <div class="container">
+            <a class="navbar-brand" href="#">Inicio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item fw-bold"><a class="nav-link" href="#redes">Redes Sociales</a></li>
+                    <li class="nav-item fw-bold"><a class="nav-link" href="#reclamos">Reclamos</a></li>
+                    <li class="nav-item fw-bold"><a class="nav-link" href="#panel">Panel de Control</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-        const dataGrafica = {
-            labels: Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
-            datasets: [{
-                label: 'Actividades Gráficas',
-                data: [12, 19, 3, 5, 2, 3, 9, 10, 8, 12, 15, 7],
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
-                lineTension: 0.4
-            }]
-        };
+    <!-- Sección de Tarjetas en Rejilla -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Sección Redes Sociales -->
+            <div class="col-md-4">
+                <section id="redes" class="mt-2">
+                    <h2><i class="fas fa-share-alt icon"></i> Redes Sociales</h2>
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <p>Análisis de la actividad mensual en redes sociales. <a href="./redesfacebbok.html" class="btn boton mt-2">Ver análisis</a></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
 
-        const dataWeb = {
-            labels: Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
-            datasets: [{
-                label: 'Actividades Web',
-                data: [6, 11, 7, 8, 10, 5, 12, 15, 6, 9, 11, 10],
-                borderColor: 'rgba(153, 102, 255, 1)',
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                fill: true,
-                lineTension: 0.4
-            }]
-        };
+            <!-- Sección Reclamos -->
+            <div class="col-md-4">
+                <section id="reclamos" class="mt-2">
+                    <h2><i class="fas fa-comments icon"></i> Reclamos</h2>
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <p>Reportes de gestión de los reclamos recibidos. <a href="./reclamosredes.html" class="btn boton mt-2">Ver análisis</a></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
 
-        const dataAudiovisual = {
-            labels: Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' })),
-            datasets: [{
-                label: 'Actividades Audiovisuales',
-                data: [8, 9, 6, 5, 4, 7, 9, 11, 15, 7, 8, 10],
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                fill: true,
-                lineTension: 0.4
-            }]
-        };
+            <!-- Sección Panel de Control -->
+            <div class="col-md-4">
+                <section id="panel" class="mt-2">
+                    <h2><i class="fas fa-tachometer-alt icon"></i> Panel de Control</h2>
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <p>Análisis detallado de las métricas de desempeño. <a href="./control.html" class="btn boton mt-2">Ver análisis</a></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
 
-        const ctxGrafica = document.getElementById('graficaChart').getContext('2d');
-        const ctxWeb = document.getElementById('webChart').getContext('2d');
-        const ctxAudiovisual = document.getElementById('audiovisualChart').getContext('2d');
+    <!-- Footer -->
+    <footer class="mt-5 text-center py- mb-0">
+        <p class="mb-0">Dirección de Comunicación - Todos los derechos reservados © - NL</p>
+    </footer>
 
-        const graficaChart = new Chart(ctxGrafica, {
-            type: 'line',
-            data: dataGrafica,
-            options: { responsive: true }
-        });
-
-        const webChart = new Chart(ctxWeb, {
-            type: 'line',
-            data: dataWeb,
-            options: { responsive: true }
-        });
-
-        const audiovisualChart = new Chart(ctxAudiovisual, {
-            type: 'line',
-            data: dataAudiovisual,
-            options: { responsive: true }
-        });
-
-        function showCalendar(type) {
-            document.querySelectorAll('.calendar-container').forEach(calendar => calendar.style.display = 'none');
-            document.getElementById(type + '-calendar').style.display = 'block';
-            document.querySelector('.btn-close').style.display = 'block';
-        }
-
-        function closeCalendar(type) {
-            document.getElementById(type + '-calendar').style.display = 'none';
-            document.querySelector('.btn-close').style.display = 'none';
-        }
-
-        function showActivities(type) {
-            const monthInput = document.getElementById(type + '-month');
-            const selectedMonth = monthInput.value;
-            document.getElementById(type + '-selected-month').textContent = selectedMonth;
-
-            // Aquí agregar lógica para mostrar actividades según el mes seleccionado
-            // Por ejemplo, se puede agregar información estática o dinámica
-        }
-
-        function downloadPDF(type) {
-            const doc = new jsPDF();
-            doc.text('Actividades ' + type.charAt(0).toUpperCase() + type.slice(1), 10, 10);
-            // Aquí puedes agregar más contenido al PDF
-
-            doc.save(type + '-actividades.pdf');
-        }
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

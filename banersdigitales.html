@@ -28,6 +28,7 @@
             text-decoration-color: orange;
             text-decoration-thickness: 5px;
         }
+        table.table td { font-size: 13px; }
     </style>
 </head>
 <body>
@@ -53,9 +54,9 @@
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
+                                        <th>Solicitante</th>
                                         <th>Detalle</th>
-                                        <th>Link</th>
-                                        <th class="remove-btn" style="width: 80px;">
+                                        <th class="remove-btn " style="width: 80px;">
                                             <button class="btn btn-danger btn-sm" onclick="removeAllRows(selectedType)">X</button>
                                         </th>
                                     </tr>
@@ -80,12 +81,61 @@
     <script>
         const programacion = {
             'Inicio de Campaña': [
-                {fecha: '2024-10-01', detalle: 'Inicio Dengue', link: '#'},
-                
+            { fecha: '2024-10-01', detalle: 'Prevención del Dengue', link: '#' }
             ],
+
             'Pedidos por áreas': [
-                {fecha: '2024-10-15', detalle: 'Diseño de Cartel Fizcalización', link: '#'},
-                {fecha: '2024-10-20', detalle: 'Logo Personal', link: '#'}
+    {fecha: '2024-02-28', solicitante: 'Subsecretaría de Gobierno', detalle: 'Cartelería y banners'},
+    {fecha: '2024-04-10', solicitante: 'Dirección de Salud', detalle: 'Cartelería y banners'},
+    {fecha: '2024-04-25', solicitante: 'Relaciones con la Comunidad', detalle: 'Cartelería y banners'},
+    {fecha: '2024-04-25', solicitante: 'Recioneles con la Comunidad', detalle: 'Cartelería y banners'},
+    {fecha: '2024-05-02', solicitante: 'Intendencia', detalle: 'Cartelería y banners'},
+    {fecha: '2024-05-21', solicitante: 'Dir. Empleo y Capacitación', detalle: 'Cartelería y banners'},
+    {fecha: '2024-05-21', solicitante: 'Dirección de Rentas', detalle: 'Cartelería y banners'},
+    {fecha: '2024-05-22', solicitante: 'Secretaría de Gobierno', detalle: 'Cartelería y banners'},
+    {fecha: '2024-05-24', solicitante: 'Dirección de Salud', detalle: 'Cartelería y banners'},
+    {fecha: '2024-05-24', solicitante: 'Dirección de Salud', detalle: 'Cartelería y banners'},
+    {fecha: '2024-05-27', solicitante: 'Relaciones con la Comunidad', detalle: 'Cartelería y banners'},
+    {fecha: '2024-06-05', solicitante: 'Dirección de Empleo y Capacitación', detalle: 'Cartelería y banners'},
+    {fecha: '2024-06-05', solicitante: 'Dirección de Empleo y Capacitación', detalle: 'Cartelería y banners'},
+    {fecha: '2024-06-18', solicitante: 'Cultura', detalle: 'Cartelería y banners'},
+    {fecha: '2024-06-18', solicitante: 'Cultura', detalle: 'Cartelería y banners'},
+    {fecha: '2024-06-25', solicitante: 'Oficina de Migraciones', detalle: 'Cartelería y banners'},
+    {fecha: '2024-07-02', solicitante: 'Cultura', detalle: 'Cartelería y banners'},
+    {fecha: '2024-07-02', solicitante: 'Cultura', detalle: 'Cartelería y banners'},
+    {fecha: '2024-07-02', solicitante: 'Cultura', detalle: 'Cartelería y banners'},
+    {fecha: '2024-07-03', solicitante: 'Delegación Coquimbito-Ortega', detalle: 'Cartelería y banners'},
+    {fecha: '2024-07-12', solicitante: 'Dirección de Tránsito y Defensa Civil', detalle: 'Cartelería y banners'},
+    {fecha: '2024-07-12', solicitante: 'Oficina de Migraciones', detalle: 'Cartelería y banners'},
+    {fecha: '2024-07-17', solicitante: 'Sub Dirección Medio Ambiente Maipú', detalle: 'Cartelería y banners'},
+    {fecha: '2024-07-18', solicitante: 'Generación Sostenible', detalle: 'Cartelería y banners, Sticker, remera, gorra, eco lápices y actualización del juego de la oca'},
+    {fecha: '2024-07-24', solicitante: 'Departamento de Niñez, Adolescencia y Familia', detalle: 'Cartelería y banners, Solo banners'},
+    {fecha: '2024-07-29', solicitante: 'SUBDELEGACIÓN SANTA BLANCA', detalle: 'Cartelería y banners'},
+    {fecha: '2024-07-30', solicitante: 'Oficina de Adultos Mayores', detalle: 'Cartelería y banners'},
+    {fecha: '2024-08-01', solicitante: 'Licencias de Conducir', detalle: 'Cartelería y banners'},
+    {fecha: '2024-08-01', solicitante: 'Dirección Mujer Género y Diversidad', detalle: 'Cartelería y banners'},
+    {fecha: '2024-08-01', solicitante: 'Departamento de Salud Mental', detalle: 'Cartelería y banners'},
+    {fecha: '2024-08-07', solicitante: 'Desarrollo Humano', detalle: 'Cartelería y banners'},
+    {fecha: '2024-08-09', solicitante: 'Subdirección de Medio Ambiente', detalle: 'Cartelería y banners'},
+    {fecha: '2024-08-12', solicitante: 'Dirección de Desarrollo Humano', detalle: 'Flybanners'},
+    {fecha: '2024-08-14', solicitante: 'Santa Blanca', detalle: 'Cartelería y banners'},
+    {fecha: '2024-08-14', solicitante: 'Santa Blanca', detalle: 'Cartelería y banners'},
+    {fecha: '2024-08-21', solicitante: 'Departamento de Salud Mental', detalle: 'Cartelería y banners'},
+    {fecha: '2024-08-22', solicitante: 'Promoción Deportiva', detalle: 'Cartelería y banners'},
+    {fecha: '2024-08-27', solicitante: 'Turismo', detalle: 'Cartelería y banners'},
+    {fecha: '2024-09-04', solicitante: 'Cultura', detalle: 'Cartelería y banners'},
+    {fecha: '2024-09-06', solicitante: 'Dirección de Empleo y Capacitación', detalle: 'Cartelería y banners'},
+    {fecha: '2024-09-12', solicitante: 'Desarrollo Económico', detalle: 'Cartelería y banners'},
+    {fecha: '2024-09-17', solicitante: 'Dirección Mujer Género y Diversidad', detalle: 'Cartelería y banners'},
+    {fecha: '2024-09-25', solicitante: 'Departamento de Salud Mental', detalle: 'Cartelería y banners'},
+    {fecha: '2024-09-26', solicitante: 'Departamento de Salud Mental', detalle: 'Cartelería y banners'},
+    {fecha: '2024-09-26', solicitante: 'Departamento de Salud Mental', detalle: 'Cartelería y banners'},
+    {fecha: '2024-09-30', solicitante: 'Ceremonial y Protocolo', detalle: 'Cartelería y banners'},
+    {fecha: '2024-10-02', solicitante: 'Dirección Mujer Género y Diversidad', detalle: 'Cartelería y banners'},
+    {fecha: '2024-10-17', solicitante: 'Delegación Fray Luis Beltrán', detalle: 'Cartelería y banners'},
+    {fecha: '2024-10-21', solicitante: 'Delegación Municipal Gral Gutiérrez', detalle: 'Cartelería y banners'},
+    {fecha: '2024-10-21', solicitante: 'Departamento de Salud Mental', detalle: 'Cartelería y banners'},
+    {fecha: '2024-10-24', solicitante: 'Dirección de Educación', detalle: 'Banners'}
             ]
         };
         let selectedType = 'Inicio de Campaña';
@@ -120,7 +170,7 @@
                 programacion[selectedType].forEach(evento => {
                     if (evento.fecha.startsWith(selectedYearMonth)) {
                         const newRow = document.createElement('tr');
-                        newRow.innerHTML = `<td>${evento.fecha}</td><td>${evento.detalle}</td><td>${evento.link}</td>`;
+                        newRow.innerHTML = `<td>${evento.fecha}</td><td>${evento.solicitante}</td><td>${evento.detalle}</td>`;
                         table.appendChild(newRow);
                         hasEvents = true;
                     }
@@ -149,15 +199,17 @@
                 row.querySelectorAll('td').forEach(cell => columns.push(cell.innerText));
                 tableRows.push(columns);
             });
-            doc.autoTable({ head: [['Fecha', 'Detalle', 'Link']], body: tableRows, startY: 130 });
+            doc.autoTable({ head: [['Fecha', 'Solicitante', 'Detalle']], body: tableRows, startY: 130 });
             doc.save(`actividades_${selectedType}_${selectedMonth}.pdf`);
         }
 
         let chart;
         function updateChart() {
             const data = { 
-                'Inicio de Campaña': [12, 19, 3, 5, 2, 3, 7, 9, 11, 13, 5, 8], 
-                'Pedidos por áreas': [4, 8, 10, 7, 9, 15, 5, 6, 10, 8, 12, 14] 
+                'Inicio de Campaña': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                
+                'Pedidos por áreas': [0, 1, 0, 3, 7, 5, 11, 11, 8, 5, , ],
+                
             };
 
             if (chart) { 
@@ -168,9 +220,8 @@
             let backgroundColor;
 
             if (selectedType === 'Inicio de Campaña') {
-                borderColor ='#1976D2'; // Azul oscuro
-             backgroundColor ='rgba(25, 118, 210, 0.2)'; // Azul oscuro con opacidad
-
+                borderColor ='#1976D2';
+                backgroundColor ='rgba(25, 118, 210, 0.2)';
             } else if (selectedType === 'Pedidos por áreas') {
                 backgroundColor = 'rgba(76, 175, 80, 0.2)';
                 borderColor = '#4CAF50';
@@ -195,13 +246,13 @@
                             ticks: { color: 'black' },
                          },
                          x: {
-                    ticks: {
-                        color: 'black', // Color oscuro para el texto de los ejes
+                            ticks: { color: 'black' }
+                         }
                     },
-                    grid: {
-                        color: 'rgba(0, 0, 0, 0.1)', // Color claro para las líneas de la rejilla
-                    }
-                }
+                    plugins: {
+                        legend: {
+                            labels: { color: 'black' }
+                        }
                     }
                 }
             });

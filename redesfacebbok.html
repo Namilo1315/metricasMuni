@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Mensual Redes Sociales</title>
+
+    <link rel="shortcut icon" href="./imagenes/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la ventana */
+            background: linear-gradient(to bottom, #ffffff, #ffffff);
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #00a6ff;
+            color: white;
+            padding: 1.0rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom-left-radius: 50% 20px;
+            border-bottom-right-radius: 50% 20px;
+            position: relative; /* Cambiado para posicionar el botón correctamente */
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Introducción */
+        .intro-text {
+            background-color: #f3f3f3;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .intro-text p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        /* Botones de Meses */
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            max-width: 1000px;
+            margin: auto;
+            padding: 1.5rem 1rem;
+        }
+
+        .boton-mes {
+            width: 150px;
+            padding: 0.8rem;
+            font-weight: 600;
+            background-color: rgb(66, 162, 66);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .boton-mes:hover {
+            background-color: rgba(50, 130, 50, 0.9);
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-highlight {
+            background-color: #ff9800;
+            color: #ffffff !important;
+        }
+
+        .btn-highlight:hover {
+            background-color: #ff990080 !important;
+            color: #ffffff !important;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333333de;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: auto; /* Empuja el footer hacia abajo */
+            margin-bottom: 0; /* Asegura que no tenga margen inferior */
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        footer p {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .home-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none; /* Quita el subrayado del enlace */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="./ooo.html" class="home-btn"><i class="fas fa-home"></i></a>
+        <h1>Reporte Mensual Redes Sociales</h1>
+        <p>Evaluación de Resultados y Objetivos</p>
+    </header>
+
+    <!-- Introducción -->
+    <section class="intro-text container text-center">
+        <p>El análisis mensual de Facebook e Instagram de Matias Stevanato y Maipú Municipio permite evaluar el rendimiento en alcance, interacciones e impresiones, identificando cómo nuestros vecinos responden al contenido. Estos datos ayudan a fijar objetivos para mejorar el compromiso y fortalecer la presencia en línea.</p>
+    </section>
+  
+    <!-- Sección de Botones de Meses -->
+    <section class="btn-container container">
+        <a href="./imagenes/Métricas Enero.pdf" target="_blank"><button class="btn boton-mes">ENERO</button></a>
+        <a href="./imagenes/Métricas febrero.pdf" target="_blank"><button class="btn boton-mes">FEBRERO</button></a>
+        <a href="./imagenes/Metricas Marzo.pdf" target="_blank"><button class="btn boton-mes">MARZO</button></a>
+        <a href="./imagenes/Métricas Abril.pdf" target="_blank"><button class="btn boton-mes">ABRIL</button></a>
+        <a href="./imagenes/Métricas Mayo.pdf" target="_blank"><button class="btn boton-mes">MAYO</button></a>
+        <a href="./imagenes/Metricas Junio.pdf" target="_blank"><button class="btn boton-mes">JUNIO</button></a>
+        <a href="./imagenes/Metricas Julio.pdf" target="_blank"><button class="btn boton-mes">JULIO</button></a>
+        <a href="./imagenes/Métricas Agosto.pdf" target="_blank"><button class="btn boton-mes">AGOSTO</button></a>
+        <a href="./imagenes/Métricas Septiembre.pdf" target="_blank"><button class="btn boton-mes btn-highlight">SEPTIEMBRE</button></a>
+        <button class="btn boton-mes">OCTUBRE</button>
+        <button class="btn boton-mes">NOVIEMBRE</button>
+        <button class="btn boton-mes">DICIEMBRE</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Dirección de Comunicación - Todos los derechos reservados © - NL</p>
+    </footer>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

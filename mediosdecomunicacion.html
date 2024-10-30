@@ -28,6 +28,7 @@
     text-decoration-color: orange;
     text-decoration-thickness: 5px;
 }
+table.table td { font-size: 14px; } 
     </style>
 </head>
 <body>
@@ -55,8 +56,8 @@
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
-                                        <th>Detalle</th>
-                                        <th>Link</th>
+                                        <th>Medio</th>
+                                        <th>Tema</th>
                                         <th class="remove-btn" style="width: 80px;">
                                             <button class="btn btn-danger btn-sm" onclick="removeAllRows(selectedType)">X</button>
                                         </th>
@@ -82,17 +83,97 @@
     <script>
         const programacion = {
             'Gráficas': [
-                {fecha: '2024-10-22', detalle: '+ Diario', link: '#'},
-                {fecha: '2024-10-24', detalle: '- Uno', link: '#'},
-                {fecha: '2024-10-24', detalle: '* Los Andes', link: '#'}
+                {fecha: '2024-10-22', medio: 'Los Andes', tema: 'Dia de la Mujer'}
             ],
             'Web': [
-                {fecha: '2024-10-15', detalle: 'Blog', link: '#'},
-                {fecha: '2024-10-20', detalle: 'Página Web', link: '#'}
-            ],
+            
+    { fecha: "2024-10-21", medio: "Mendo Voz", tema: "Caminata Rosa" },
+    { fecha: "2024-10-21", medio: "Los Andes", tema: "Editorial Urbanización" },
+    { fecha: "2024-10-21", medio: "Los Andes", tema: "Editorial Peronismo" },
+    { fecha: "2024-10-21", medio: "Diario San Rafael", tema: "Garrafa En Tu Barrio" },
+    { fecha: "2024-10-21", medio: "Sitio Andino", tema: "Garrafa En Tu Barrio" },
+    { fecha: "2024-10-21", medio: "Memo", tema: "Interna Cfk" },
+    { fecha: "2024-10-21", medio: "El Sol", tema: "Alcohol Al Volante" },
+    { fecha: "2024-10-21", medio: "Los Andes", tema: "Cierre Listas Pj" },
+    { fecha: "2024-10-21", medio: "Mendoza Post", tema: "Entrevista Emir Félix" },
+    { fecha: "2024-10-21", medio: "Mendoza Post", tema: "Interna Pj" },
+    { fecha: "2024-10-21", medio: "Mendoza Post", tema: "Dengue" },
+    { fecha: "2024-10-21", medio: "Sitio Andino", tema: "Listas Pj" },
+    { fecha: "2024-10-21", medio: "Memo", tema: "Interna Pj" },
+    { fecha: "2024-10-21", medio: "Memo", tema: "Interna Pj" },
+    { fecha: "2024-10-21", medio: "Memo", tema: "Entrevista Felix" },
+    { fecha: "2024-10-21", medio: "Mendoza Today", tema: "Entrevista Felix" },
+    { fecha: "2024-10-21", medio: "Mendoza Today", tema: "Peronismo Mendocino" },
+    { fecha: "2024-10-21", medio: "UNO", tema: "Peronismo Mendocino" },
+    { fecha: "2024-10-21", medio: "Minuto Ya", tema: "Barca Academy" },
+    { fecha: "2024-10-21", medio: "Minuto Ya", tema: "Pj" },
+    { fecha: "2024-10-21", medio: "Mendoza Post", tema: "Interna Pj" },
+    { fecha: "2024-10-21", medio: "Diario Mendoza", tema: "Barcelona" },
+    { fecha: "2024-10-21", medio: "Mendo Voz", tema: "Caminata Rosa" },
+    { fecha: "2024-10-21", medio: "Los Andes", tema: "Editorial Urbanización" },
+    { fecha: "2024-10-21", medio: "Los Andes", tema: "Editorial Peronismo" },
+    { fecha: "2024-10-21", medio: "Diario San Rafael", tema: "Garrafa En Tu Barrio" },
+    { fecha: "2024-10-21", medio: "Sitio Andino", tema: "Garrafa En Tu Barrio" },
+    { fecha: "2024-10-21", medio: "Memo", tema: "Interna Cfk" },
+    { fecha: "2024-10-21", medio: "El Sol", tema: "Alcohol Al Volante" },
+    { fecha: "2024-10-21", medio: "Los Andes", tema: "Cierre Listas Pj" },
+    { fecha: "2024-10-21", medio: "Mendoza Post", tema: "Entrevista Emir Félix" },
+    { fecha: "2024-10-21", medio: "Mendoza Post", tema: "Interna Pj" },
+    { fecha: "2024-10-21", medio: "Mendoza Post", tema: "Dengue" },
+    { fecha: "2024-10-21", medio: "Sitio Andino", tema: "Listas Pj" },
+    { fecha: "2024-10-21", medio: "Memo", tema: "Interna Pj" },
+    { fecha: "2024-10-21", medio: "Memo", tema: "Interna Pj" },
+    { fecha: "2024-10-21", medio: "Memo", tema: "Entrevista Felix" },
+    { fecha: "2024-10-21", medio: "Mendoza Today", tema: "Entrevista Felix" },
+    { fecha: "2024-10-21", medio: "Mendoza Today", tema: "Peronismo Mendocino" },
+    { fecha: "2024-10-21", medio: "UNO", tema: "Peronismo Mendocino" },
+    { fecha: "2024-10-21", medio: "Minuto Ya", tema: "Barca Academy" },
+    { fecha: "2024-10-21", medio: "Minuto Ya", tema: "Pj" },
+    { fecha: "2024-10-21", medio: "Mendoza Post", tema: "Interna Pj" },
+    { fecha: "2024-10-21", medio: "Diario Mendoza", tema: "Barcelona" },
+    { fecha: "2024-10-24", medio: "Los Andes", tema: "Foro De Salud Mental" },
+    { fecha: "2024-10-24", medio: "Los Andes", tema: "Interna Pj" },
+    { fecha: "2024-10-24", medio: "Sitio Andino", tema: "Foro Salud Mental" },
+    { fecha: "2024-10-24", medio: "Jornada", tema: "Foro De Salud Mental" },
+    { fecha: "2024-10-24", medio: "UNO", tema: "Calles Beltrán" },
+    { fecha: "2024-10-24", medio: "UNO", tema: "Félix" },
+    { fecha: "2024-10-24", medio: "ECOCUYO", tema: "Vino Y Cine" },
+    { fecha: "2024-10-24", medio: "Los Andes", tema: "Elizalde" },
+    { fecha: "2024-10-24", medio: "Mendoza Post", tema: "Quincho" },
+    { fecha: "2024-10-25", medio: "Jornada", tema: "Escuela Rdm" },
+    { fecha: "2024-10-25", medio: "Jornada", tema: "Artistas Festival Vacio" },
+    { fecha: "2024-10-25", medio: "MDZ", tema: "Pj" },
+    { fecha: "2024-10-25", medio: "UNO", tema: "Pj 2027" },
+    { fecha: "2024-10-25", medio: "Memo", tema: "Editorial Peronismo" },
+    { fecha: "2024-10-25", medio: "Diario Mendoza", tema: "Félix" },
+    { fecha: "2024-10-25", medio: "Mendoza Post", tema: "Foro Salud Mental" },
+    { fecha: "2024-10-25", medio: "Mendoza Post", tema: "Felix" },
+    { fecha: "2024-10-25", medio: "UNO", tema: "Félix" },
+    { fecha: "2024-10-25", medio: "Mendoza Today", tema: "Félix" },
+    { fecha: "2024-10-25", medio: "Memo", tema: "Félix" },
+    { fecha: "2024-10-25", medio: "MDZ", tema: "Elecciones 2025" },
+    { fecha: "2024-10-26", medio: "Memo", tema: "Vacío A La Llama" },
+    { fecha: "2024-10-26", medio: "Jornada", tema: "Editorial Pj" },
+    { fecha: "2024-10-26", medio: "El Sol", tema: "Editorial Pj" },
+    { fecha: "2024-10-26", medio: "Mendoza Today", tema: "Bandas Festival Vacío" },
+    { fecha: "2024-10-26", medio: "Diario Mendoza", tema: "Bandas Festival Vacío" },
+    { fecha: "2024-10-26", medio: "Sitio Andino", tema: "Dengue" },
+    { fecha: "2024-10-27", medio: "Mendovoz", tema: "Policial Incendio" },
+    { fecha: "2024-10-27", medio: "El Sol", tema: "Policial Incendio" },
+    { fecha: "2024-10-27", medio: "Diario Mendoza", tema: "Tevez" },
+    { fecha: "2024-10-27", medio: "Sitio Andino", tema: "Garrafa En Tu Barrio" },
+    { fecha: "2024-10-27", medio: "Sitio Andino", tema: "Pj" },
+    { fecha: "2024-10-27", medio: "MDZ", tema: "Félix" },
+    { fecha: "2024-10-27", medio: "Mendoza Post", tema: "Stevanato Allasino Tevez" },
+    { fecha: "2024-10-27", medio: "Mendovoz", tema: "Garrafa En Tu Barrio" },
+    { fecha: "2024-10-27", medio: "Mendovoz", tema: "Artistas Festival Vacío" },
+    { fecha: "2024-10-27", medio: "Mendoza Today", tema: "Garrafa En Tu Barrio" },
+    { fecha: "2024-10-27", medio: "UNO", tema: "Editorial" },
+    { fecha: "2024-10-27", medio: "Los Andes", tema: "Félix" },
+    { fecha: "2024-10-27", medio: "Los Andes", tema: "Editorial" }
+],
             'Audiovisual': [
-                {fecha: '2024-10-12', detalle: 'Video', link: '#'},
-                {fecha: '2024-10-18', detalle: 'Podcast', link: '#'}
+            {fecha: '2024-10-22', medio: 'Canal 9', tema: 'Dia de la Madre'}
             ]
         };
         let selectedType = 'Gráficas'; // Set the default type
@@ -128,7 +209,7 @@
                 programacion[selectedType].forEach(evento => {
                     if (evento.fecha.startsWith(selectedYearMonth)) {
                         const newRow = document.createElement('tr');
-                        newRow.innerHTML = `<td>${evento.fecha}</td><td>${evento.detalle}</td><td>${evento.link}</td>`;
+                        newRow.innerHTML = `<td>${evento.fecha}</td><td>${evento.medio}</td><td>${evento.tema}</td>`;
                         table.appendChild(newRow);
                         hasEvents = true;
                     }
@@ -157,16 +238,16 @@
                 row.querySelectorAll('td').forEach(cell => columns.push(cell.innerText));
                 tableRows.push(columns);
             });
-            doc.autoTable({ head: [['Fecha', 'Detalle', 'Link']], body: tableRows, startY: 130 });
+            doc.autoTable({ head: [['Fecha', 'Medio', 'Tema']], body: tableRows, startY: 130 });
             doc.save(`actividades_${selectedType}_${selectedMonth}.pdf`);
         }
 
         let chart;
         function updateChart() {
     const data = { 
-        'Gráficas': [121, 45, 25, 17, 27, 27, 26, 14, 14, 15, 12, 10], 
-        'Web': [3, 1, 2, 4, 5, 6, 7, 8, 9, 10, 15, 16], 
-        'Audiovisual': [5, 4, 3, 7, 8, 2, 6, 9, 8, 7, 6, 6] 
+        'Gráficas':[10, 14, 14, 17, 25, 26, 27, 27, 45, 50],
+        'Web': [300, 350, 400, 450, 500, 550, 610,620, 630,640 , , ], 
+        'Audiovisual': [5, 4, 3, 7, 8, 5, 6, 9, 8,10 , , ] 
     };
 
     if (chart) { 
