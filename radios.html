@@ -84,9 +84,12 @@
                 {fecha: '2024-10-24', detalle: 'Dengue', link: '#'}
             ],
             'Medios': [
-                {fecha: '2024-10-15', detalle: 'FM', link: '#'},
-                {fecha: '2024-10-20', detalle: 'Entrevista en Radio', link: '#'}
+                {fecha: '2024-11-1', detalle: 'Mitre 22', link: '#'},
+                {fecha: '2024-11-1', detalle: 'Nihuil 10', link: '#'},
+                {fecha: '2024-11-1', detalle: 'MDZ 10', link: '#'},
+                {fecha: '2024-11-1', detalle: 'LV 10', link: '#'}
             ]
+   
         };
         let selectedType = 'Campañas';
         const defaultMonth = new Date().toISOString().slice(0, 7);
@@ -156,8 +159,8 @@
         let chart;
         function updateChart() {
             const data = { 
-                'Campañas': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 
-                'Medios': [0, 0, 0, 0, 0, 0, 0, 70, 55, 79] 
+                'Campañas': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1], 
+                'Medios': [0, 0, 0, 0, 0, 0, 0, 70, 55, 79, 51] 
             };
 
             if (chart) { 

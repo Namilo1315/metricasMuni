@@ -83,7 +83,9 @@ table.table td { font-size: 14px; }
     <script>
         const programacion = {
             'Gráficas': [
-                {fecha: '2024-10-22', medio: 'Los Andes', tema: 'Dia de la Mujer'}
+                {fecha: '2024-11-01', medio: 'Los Andes', tema: '17 Publicaciones'},
+                {fecha: '2024-11-01', medio: 'Mendovos', tema: '15 Publicaciones'},
+              
             ],
             'Web': [
             
@@ -170,10 +172,33 @@ table.table td { font-size: 14px; }
     { fecha: "2024-10-27", medio: "Mendoza Today", tema: "Garrafa En Tu Barrio" },
     { fecha: "2024-10-27", medio: "UNO", tema: "Editorial" },
     { fecha: "2024-10-27", medio: "Los Andes", tema: "Félix" },
-    { fecha: "2024-10-27", medio: "Los Andes", tema: "Editorial" }
-],
+    { fecha: "2024-10-27", medio: "Los Andes", tema: "Editorial" },
+    { fecha: "2024-11-01 ", medio: "MendoVoz", tema: "31 Publicaciones" },
+    { fecha: "2024-11-02", medio: "Los Andes", tema: "30 Publicaciones" },
+    { fecha: "2024-11-03", medio: "MDZ Online", tema: "24 Publicaciones" },
+    { fecha: "2024-11-04", medio: "Sitio Andino", tema: "24 Publicaciones" },
+    { fecha: "2024-11-05", medio: "Diario", tema: "19 Publicaciones" },
+    { fecha: "2024-11-06", medio: "Mendoza", tema: "18 Publicaciones" },
+    { fecha: "2024-11-07", medio: "Mendoza Post", tema: "18 Publicaciones" },
+    { fecha: "2024-11-08", medio: "El Sol", tema: "14 Publicaciones" },
+    { fecha: "2024-11-09", medio: "Minuto Ya", tema: "12 Publicaciones" },
+    { fecha: "2024-11-10", medio: "Diario UNO Online", tema: "10 Publicaciones" },
+    { fecha: "2024-11-11", medio: "Memo", tema: "10 Publicaciones" },
+    { fecha: "2024-11-12", medio: "Mendoza", tema: "10 Publicaciones" },
+    { fecha: "2024-11-12", medio: "Today", tema: "9 Publicaciones" },
+    { fecha: "2024-11-13", medio: "Cuyo Noticias", tema: "5 Publicaciones" },
+    { fecha: "2024-11-14", medio: "Ciudadano", tema: "2 Publicaciones" },
+    { fecha: "2024-11-15", medio: "Vox Pópuli", tema: "1 Publicaciones" },
+    { fecha: "2024-11-16", medio: "Punto a Punto", tema: "14 Publicaciones" }
+    ],
             'Audiovisual': [
-            {fecha: '2024-10-22', medio: 'Canal 9', tema: 'Dia de la Madre'}
+    { fecha: "2024-11-01", medio: "Canal 7", tema: " 10 Publicaciones" },
+    { fecha: "2024-11-02", medio: "Canal 9", tema: " 2 Publicaciones" },
+    { fecha: "2024-11-03", medio: "Mitre", tema: "22 Publicaciones" },
+    { fecha: "2024-11-04", medio: "Nihuil", tema: "10 Publicaciones" },
+    { fecha: "2024-11-05", medio: "MDZ", tema: "10 Publicaciones" },
+    { fecha: "2024-11-06", medio: "LV 10", tema: " 9 Publicaciones" }
+
             ]
         };
         let selectedType = 'Gráficas'; // Set the default type
@@ -245,9 +270,9 @@ table.table td { font-size: 14px; }
         let chart;
         function updateChart() {
     const data = { 
-        'Gráficas':[0, 0, 0, 0, 0, 0, 0, 21, 19, 39],
-        'Web': [0, 0, 0, 0, 0, 0, 0, 235, 221, 316 , , ], 
-        'Audiovisual': [0, 0, 0, 0, 0, 0, 0, 76, 81, 101 , , ] 
+        'Gráficas':[0, 0, 0, 0, 0, 0, 0, 21, 19, 39, 27],
+        'Web': [0, 0, 0, 0, 0, 0, 0, 235, 221, 316 , 238, ], 
+        'Audiovisual': [0, 0, 0, 0, 0, 0, 0, 76, 81, 101 ,63 , ] 
     };
 
     if (chart) { 
