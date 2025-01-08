@@ -85,6 +85,8 @@ table.table td { font-size: 14px; }
             'Gráficas': [
                 {fecha: '2024-11-01', medio: 'Los Andes', tema: '17 Publicaciones'},
                 {fecha: '2024-11-01', medio: 'Mendovos', tema: '15 Publicaciones'},
+                {fecha: '2024-12-01', medio: 'Los Andes', tema: '18 Publicaciones'},
+                {fecha: '2024-12-01', medio: 'Mendovos', tema: '9 Publicaciones'},
               
             ],
             'Web': [
@@ -189,7 +191,24 @@ table.table td { font-size: 14px; }
     { fecha: "2024-11-13", medio: "Cuyo Noticias", tema: "5 Publicaciones" },
     { fecha: "2024-11-14", medio: "Ciudadano", tema: "2 Publicaciones" },
     { fecha: "2024-11-15", medio: "Vox Pópuli", tema: "1 Publicaciones" },
-    { fecha: "2024-11-16", medio: "Punto a Punto", tema: "14 Publicaciones" }
+    { fecha: "2024-11-16", medio: "Punto a Punto", tema: "14 Publicaciones" },
+    { fecha: "2024-12-01", medio: "Los Andes OnLine", tema: " 33 Publicaciones " },
+    { fecha: "2024-12-02", medio: "MendoVoz", tema: "30 Publicaciones " },
+    { fecha: "2024-12-03", medio: "MDZ OnLine", tema: " 29 Publicaciones" },
+    { fecha: "2024-12-04", medio: "Sitio Andino", tema: " 28 Publicaciones " },
+    { fecha: "2024-12-05", medio: "Mendoza Post", tema: " 24 Publicaciones " },
+    { fecha: "2024-12-06", medio: "Diario Mendoza", tema: " 20 Publicaciones" },
+    { fecha: "2024-12-07", medio: "El Sol", tema: " 17 Publicaciones " },
+    { fecha: "2024-12-08", medio: "Memo", tema: " 15 Publicaciones" },
+    { fecha: "2024-12-09", medio: "Diario UNO OnLine", tema: " 14 Publicaciones " },
+    { fecha: "2024-12-10", medio: "Mendoza Today", tema: "13 Publicaciones " },
+    { fecha: "2024-12-11", medio: "Minuto Ya", tema: " 13 Publicaciones" },
+    { fecha: "2024-12-12", medio: "Diario San Rafael", tema: " 6 Publicaciones" },
+    { fecha: "2024-12-13", medio: "Cuyo Noticias", tema: "5 Publicaciones " },
+    { fecha: "2024-12-14", medio: "Eco Cuyo", tema: " 2 Publicaciones " },
+    { fecha: "2024-12-15", medio: "Vox Pópuli", tema: "2 Publicaciones" },
+    { fecha: "2024-12-15", medio: "Cuidadano", tema: "1 Publicaciones" },
+    { fecha: "2024-12-16", medio: "Punto a Punto", tema: "1 Publicaciones" }
     ],
             'Audiovisual': [
     { fecha: "2024-11-01", medio: "Canal 7", tema: " 10 Publicaciones" },
@@ -197,7 +216,13 @@ table.table td { font-size: 14px; }
     { fecha: "2024-11-03", medio: "Mitre", tema: "22 Publicaciones" },
     { fecha: "2024-11-04", medio: "Nihuil", tema: "10 Publicaciones" },
     { fecha: "2024-11-05", medio: "MDZ", tema: "10 Publicaciones" },
-    { fecha: "2024-11-06", medio: "LV 10", tema: " 9 Publicaciones" }
+    { fecha: "2024-11-06", medio: "LV 10", tema: " 9 Publicaciones" },
+    { fecha: "2024-12-01", medio: "MDZ", tema: "28 Publicaciones " },
+  { fecha: "2024-12-02", medio: "Mitre", tema: "22 Publicaciones " },
+  { fecha: "2024-12-03", medio: "LV 10", tema: "12 Publicaciones " },
+  { fecha: "2024-12-04", medio: "Nihuil", tema: " 9 Publicaciones " },
+  { fecha: "2024-12-05", medio: "Canal 9", tema: "15 Publicaciones " },
+  { fecha: "2024-12-06", medio: "Canal 7", tema: "4 Publicaciones" }
 
             ]
         };
@@ -270,9 +295,9 @@ table.table td { font-size: 14px; }
         let chart;
         function updateChart() {
     const data = { 
-        'Gráficas':[0, 0, 0, 0, 0, 0, 0, 21, 19, 39, 27],
-        'Web': [0, 0, 0, 0, 0, 0, 0, 235, 221, 316 , 238, ], 
-        'Audiovisual': [0, 0, 0, 0, 0, 0, 0, 76, 81, 101 ,63 , ] 
+        'Gráficas':[0, 0, 0, 0, 0, 0, 0, 21, 19, 39, 27, 27],
+        'Web': [0, 0, 0, 0, 0, 0, 0, 235, 221, 316 , 238, 254 ], 
+        'Audiovisual': [0, 0, 0, 0, 0, 0, 0, 76, 81, 101 ,63,90 ] 
     };
 
     if (chart) { 
